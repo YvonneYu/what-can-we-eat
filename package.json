@@ -1,0 +1,19 @@
+{
+  "name": "what-are-you-want-to-eat",
+  "version": "1.0.0",
+  "description": "用 React.js 跟 Redux 製作的小專案，可挑選附近想吃的店家（店家需自行輸入）",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YvonneYu/What-are-you-want-to-eat.git"
+  },
+  "author": "Yvonne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YvonneYu/What-are-you-want-to-eat/issues"
+  },
+  "homepage": "https://github.com/YvonneYu/What-are-you-want-to-eat#readme"
+}
