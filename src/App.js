@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.css';
 import Layout from './components/Layout/Layout.js';
+import RestaurantsBuilder from './containers/RestaurantsBuilder/RestaurantsBuilder';
 
 function App() {
   return (
     <div>
-      <Layout>HELLO</Layout>
+      <Layout>
+        <RestaurantsBuilder></RestaurantsBuilder>
+      </Layout>
     </div>
   );
 }
