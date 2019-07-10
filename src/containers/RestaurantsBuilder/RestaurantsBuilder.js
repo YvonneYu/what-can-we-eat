@@ -30,7 +30,16 @@ class restaurantsBuilder extends Component {
       resComponent = <p>很抱歉，無搜尋結果...</p>;
     }
     return (
-      <div className="row">{resComponent}</div>
+      <table>
+        <thead>
+        <tr>
+          <th width="350">餐廳名稱</th>
+          <th width="150">電話</th>
+          <th>地址</th>
+        </tr>
+        </thead>
+        {resComponent}
+      </table>
     )
   }
 }
