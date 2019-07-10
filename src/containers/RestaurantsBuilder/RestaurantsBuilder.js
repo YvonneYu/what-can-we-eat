@@ -26,9 +26,11 @@ class restaurantsBuilder extends Component {
       resComponent = this.state.res.map(function (res, index) {
         return <Restaurant key={index} {...res}></Restaurant>;
       });
+    } else {
+      resComponent = <p>很抱歉，無搜尋結果...</p>;
     }
     return (
-      <div>{resComponent}</div>
+      <div className="row">{resComponent}</div>
     )
   }
 }
