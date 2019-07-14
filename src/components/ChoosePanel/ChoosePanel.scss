@@ -5,8 +5,13 @@ $selected-color: green;
         display: none;
     }
 
-    input:checked + label,
-    input:checked + label:active {
+    .button {
+        margin: 0;
+        border: 1px solid #cccccc;
+    }
+
+    input:checked + .button,
+    input:checked + .button:active {
         background-color: $selected-color;
     }
 }
