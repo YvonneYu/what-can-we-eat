@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './ChoosePanel.scss';
 
 const choosePanel  = (props) => {
+
   return (
-    <form>
+    <form onSubmit={props.onSubmit}>
       <div className="grid-x grid-padding-x">
         <lable htmlFor="res_name">餐廳名稱
           <input type="text" name="res_name" id="res_name" placeholder="請輸入餐廳名稱..."/>
@@ -18,6 +19,9 @@ const choosePanel  = (props) => {
           <input id="checkbox3" type="checkbox"/>
           <label className="button" htmlFor="checkbox3">貴</label>
         </fieldset>
+      </div>
+      <div>
+        <input type="submit" value="送出" />
       </div>
     </form>
   )
