@@ -38,7 +38,9 @@ class restaurantsBuilder extends Component {
           <th>地址</th>
         </tr>
         </thead>
+        <tbody>
         {resComponent}
+        </tbody>
       </table>
     )
   }
