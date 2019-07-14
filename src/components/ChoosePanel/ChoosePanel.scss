@@ -1,0 +1,12 @@
+$selected-color: green;
+
+.panel-select {
+    input {
+        display: none;
+    }
+
+    input:checked + label,
+    input:checked + label:active {
+        background-color: $selected-color;
+    }
+}
