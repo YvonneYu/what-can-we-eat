@@ -11,16 +11,28 @@ const getCheckedList = (list) => {
 
 const restChoicesData = {
   getTypes: () => {
-    return getCheckedList(RestChoices.types);
+    return {
+      label: RestChoices.types.label,
+      data: getCheckedList(RestChoices.types.data)
+    };
   },
   getPrices: () => {
-    return getCheckedList(RestChoices.prices);
+    return {
+      label: RestChoices.prices.label,
+      data: getCheckedList(RestChoices.prices.data)
+    };
   },
   getTimeList: () => {
-    return getCheckedList(RestChoices.time);
+    return {
+      label: RestChoices.time.label,
+      data: getCheckedList(RestChoices.time.data)
+    };
   },
   getModes: () => {
-    return getCheckedList(RestChoices.modes);
+    return {
+      label: RestChoices.modes.label,
+      data: getCheckedList(RestChoices.modes.data)
+    };
   }
 };
 

@@ -6,14 +6,19 @@ import RestChoiceData from '../../utils/RestChoicesData';
 class choosePanelBuilder extends Component {
 
   state = {
-    res_prices: RestChoiceData.getPrices()
+    res_prices: RestChoiceData.getPrices(),
+    res_types: RestChoiceData.getTypes(),
+    res_times: RestChoiceData.getTimeList(),
+    res_modes: RestChoiceData.getModes()
   };
 
   onSelectorChange = (targetIndex) => {
-    let newValues = this.state.res_prices.map((value, i) => {
+    let newValues = this.state.res_prices.data.map((value, i) => {
         return targetIndex !== i ? value: {...value, checked: !value.checked};
     });
-    this.setState( { res_prices: newValues });
+    let newPrices = RestChoiceData.getPrices();
+    newPrices.data = newValues;
+    this.setState( { res_prices: newPrices });
   };
 
   handleSubmit = (e) => {

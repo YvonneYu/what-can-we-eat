@@ -3,7 +3,7 @@ import './ChoosePanel.scss';
 
 const choosePanel  = (props) => {
 
-  let selectorInputCom = props.res_prices.map( (value, index) => {
+  let selectorInputCom = props.res_prices.data.map( (value, index) => {
     let id = 'checkbox'+ index;
     return (
       <React.Fragment key={index}>
@@ -22,7 +22,7 @@ const choosePanel  = (props) => {
         </lable>
       </div>
       <div className="grid-x grid-padding-x panel-select">
-        <fieldset className="large-5 cell">價格
+        <fieldset className="large-5 cell">{props.res_prices.label}
           { selectorInputCom }
         </fieldset>
       </div>
