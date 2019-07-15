@@ -1,5 +1,6 @@
 import React from 'react';
 import ChoiceSelectors from './ChoiceSelectors';
+import RestaurantInputs from './RestaurantInputs';
 import './ChoosePanel.scss';
 
 const choosePanel  = (props) => {
@@ -15,12 +16,7 @@ const choosePanel  = (props) => {
 
   return (
     <form onSubmit={ props.onSubmit }>
-      <div className="grid-x grid-padding-x">
-        <div className="cell">
-          <label htmlFor="res_name">餐廳名稱</label>
-          <input type="text" name="res_name" id="res_name" placeholder="請輸入餐廳名稱..."/>
-        </div>
-      </div>
+      <RestaurantInputs></RestaurantInputs>
       { selectorsItems }
       <div>
         <input type="submit" value="送出" />
