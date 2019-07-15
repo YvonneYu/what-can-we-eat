@@ -11,9 +11,10 @@ const choosePanel  = (props) => {
   return (
     <form onSubmit={ props.onSubmit }>
       <div className="grid-x grid-padding-x">
-        <lable htmlFor="res_name">餐廳名稱
+        <div className="cell">
+          <lable htmlFor="res_name">餐廳名稱</lable>
           <input type="text" name="res_name" id="res_name" placeholder="請輸入餐廳名稱..."/>
-        </lable>
+        </div>
       </div>
       { selectorsItems }
       <div>

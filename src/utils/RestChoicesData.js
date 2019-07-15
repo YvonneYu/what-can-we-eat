@@ -10,29 +10,13 @@ const getCheckedList = (list) => {
 };
 
 const restChoicesData = {
-  getTypes: () => {
-    return {
-      label: RestChoices.types.label,
-      data: getCheckedList(RestChoices.types.data)
-    };
-  },
-  getPrices: () => {
-    return {
-      label: RestChoices.prices.label,
-      data: getCheckedList(RestChoices.prices.data)
-    };
-  },
-  getTimeList: () => {
-    return {
-      label: RestChoices.time.label,
-      data: getCheckedList(RestChoices.time.data)
-    };
-  },
-  getModes: () => {
-    return {
-      label: RestChoices.modes.label,
-      data: getCheckedList(RestChoices.modes.data)
-    };
+  getTypes: RestChoices.types,
+  getChoiceData: () => {
+    let list = [];
+    for (let [, value] of Object.entries(RestChoices.list)) {
+      list.push({...value, data: getCheckedList(value.data)});
+    }
+    return list;
   }
 };
 
