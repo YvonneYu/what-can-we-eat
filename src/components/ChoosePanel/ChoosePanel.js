@@ -3,7 +3,7 @@ import './ChoosePanel.scss';
 
 const choosePanel  = (props) => {
 
-  let selectorInputCom = props.priceValues.map( (value, index) => {
+  let selectorInputCom = props.res_prices.map( (value, index) => {
     let id = 'checkbox'+ index;
     return (
       <React.Fragment key={index}>
