@@ -6,7 +6,12 @@ import RestChoiceData from '../../utils/RestChoicesData';
 class choosePanelBuilder extends Component {
 
   state = {
-    choices: RestChoiceData.getChoiceData()
+    choices: RestChoiceData.getChoiceData(),
+    resInfo: {
+      name: '',
+      tel:'',
+      address:''
+    }
   };
 
   onChoiceSelectorChange = (targetType, targetIndex) => {
@@ -25,6 +30,12 @@ class choosePanelBuilder extends Component {
     this.setState( { choices: newChoices });
   };
 
+  onInfoChange = (event, inputName) => {
+     let newResInfo = {...this.state.resInfo};
+      newResInfo[inputName] = event.target.value;
+    this.setState( { resInfo: newResInfo });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(e);
@@ -36,8 +47,9 @@ class choosePanelBuilder extends Component {
           <ChoosePanel
             {...this.state}
             onSubmit={this.handleSubmit}
-            onSelectorChange={this.onChoiceSelectorChange}
-          ></ChoosePanel>
+            onInfoChange={ this.onInfoChange }
+            onSelectorChange={this.onChoiceSelectorChange}>
+          </ChoosePanel>
         </div>
       );
   }

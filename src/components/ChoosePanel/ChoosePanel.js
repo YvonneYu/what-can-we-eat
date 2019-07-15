@@ -16,7 +16,10 @@ const choosePanel  = (props) => {
 
   return (
     <form onSubmit={ props.onSubmit }>
-      <RestaurantInputs></RestaurantInputs>
+      <RestaurantInputs
+        onChange={ props.onInfoChange }
+        value={ props.resInfo }>
+      </RestaurantInputs>
       { selectorsItems }
       <div>
         <input type="submit" value="送出" />
