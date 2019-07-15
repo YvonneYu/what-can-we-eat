@@ -5,7 +5,7 @@ import './Restaurant.scss';
 const restaurant = (props) => {
   return (
     <div className="cell">
-      <div className="card">
+      <div className="card card-size">
           <div className="card-section">
             <p>名稱：{props.name} </p>
             <p>電話：{ props.tel? (<a href={ 'tel:' + props.tel }>{props.tel}</a>) : null}</p>

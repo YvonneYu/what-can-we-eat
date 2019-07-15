@@ -18,7 +18,15 @@ $top-bar-color: #ffffff;
 
     .menu {
         background: $top-bar-bg-color;
-        a { color: $top-bar-color; }
+        li {
+            margin: 0 5px;
+            border-bottom: 1px solid $top-bar-color;
+
+            a {
+                padding: 0.5rem;
+                color: $top-bar-color;
+            }
+        }
     }
 }
 
