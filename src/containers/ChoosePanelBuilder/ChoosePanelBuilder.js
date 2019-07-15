@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ChoosePanel from '../../components/ChoosePanel/ChoosePanel';
 import './ChoosePanelBuilder.scss';
-import restChoices from '../../util/restChoices.json';
+import RestChoiceData from '../../utils/RestChoicesData';
 
 class choosePanelBuilder extends Component {
 
   state = {
-    res_prices: []
+    res_prices: RestChoiceData.getPrices()
   };
 
   onSelectorChange = (targetIndex) => {
@@ -22,7 +22,6 @@ class choosePanelBuilder extends Component {
   };
 
   render() {
-    console.log('restChoices', restChoices);
     return (
         <div className="main-selector-panel">
           <ChoosePanel
