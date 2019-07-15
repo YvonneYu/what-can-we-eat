@@ -9,8 +9,9 @@ const restaurantInput = (props) => {
       <input type={ props.type } name={ labelName } id={ labelName } value={ props.value }
              onChange={ (event) => props.onChange(event, props.id) }
              placeholder={props.placeholder} />
+      { props.isValid ? null : <p className="form-error"> { props.errorMessage } </p> }
     </div>
-    )
+   )
 };
 
 export default restaurantInput;

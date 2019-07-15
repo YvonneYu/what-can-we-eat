@@ -10,9 +10,10 @@ class choosePanelBuilder extends Component {
     resInfo: {
       name: {
         value: '',
-        label: '名稱',
+        label: '*名稱',
         type: 'text',
         placeholder: '請輸入餐廳名稱...',
+        errorMessage: '此欄位為必填',
         isValid: true,
         isRequired: true
       },
@@ -21,6 +22,7 @@ class choosePanelBuilder extends Component {
         label: '電話',
         type: 'tel',
         placeholder: '請輸入餐廳電話...',
+        errorMessage: '此欄位必須為數字',
         isValid: true,
         isRequired: false
       },
