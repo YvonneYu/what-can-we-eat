@@ -22,7 +22,7 @@ class choosePanelBuilder extends Component {
         type: 'tel',
         placeholder: '請輸入餐廳電話...',
         isValid: true,
-        isRequired: true
+        isRequired: false
       },
       address: {
         value: '',
@@ -30,7 +30,7 @@ class choosePanelBuilder extends Component {
         type: 'text',
         placeholder: '請輸入餐廳地址...',
         isValid: true,
-        isRequired: true
+        isRequired: false
       }
     }
   };
@@ -51,9 +51,26 @@ class choosePanelBuilder extends Component {
     this.setState( { choices: newChoices });
   };
 
+  validateInput = (value, rules) => {
+    let isValid = true;
+    // trim empty space
+    let trimValue = value.trim();
+    // 檢查是否 required
+    if (rules.isRequired) {
+        isValid = trimValue !== '';
+    }
+    // 簡單檢查 tel input 是否是 number
+    if (rules.type === 'tel') {
+        isValid = !isNaN(parseFloat(trimValue)) && isFinite(trimValue);
+    }
+    return isValid;
+  };
+
   onInfoChange = (event, inputKey) => {
      let newResInfo = {...this.state.resInfo};
-     newResInfo[inputKey] = { ...newResInfo[inputKey], value: event.target.value};
+     let newValue = event.target.value;
+     let isValid = this.validateInput(newValue, newResInfo[inputKey]);
+     newResInfo[inputKey] = { ...newResInfo[inputKey], value: newValue, isValid: isValid};
      this.setState( { resInfo: newResInfo });
   };
 
