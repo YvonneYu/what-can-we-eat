@@ -1,0 +1,36 @@
+// Foundation
+@import '~foundation-sites/scss/foundation';
+
+$top-bar-bg-color: #0d98ba;
+$top-bar-color: #ffffff;
+
+.my-top-bar {
+    margin-bottom: 20px;
+    padding-left: 20px;
+
+    background: $top-bar-bg-color;
+    color: #ffffff;
+    box-shadow: 0 0 15px #cccccc;
+
+    .top-bar-title {
+        color: $top-bar-color;
+    }
+
+    .menu {
+        background: $top-bar-bg-color;
+        a { color: $top-bar-color; }
+    }
+}
+
+.my-main {
+    width: 80%;
+    margin: 0 auto;
+
+    @include breakpoint(medium) {
+        width: 85%;
+    }
+
+    @include breakpoint(small) {
+        width: 90%;
+    }
+}

@@ -2,20 +2,10 @@
 @import '~foundation-sites/scss/foundation';
 
 .main-selector-panel {
-    width: 80%;
-    margin: 0 auto;
     padding: 20px;
 
     border: 1px solid #cccccc;
     border-radius: 5px;
 
     box-shadow: 5px 5px 10px #cccccc;
-
-    @include breakpoint(medium) {
-        width: 85%;
-    }
-
-    @include breakpoint(small) {
-        width: 90%;
-    }
 }
