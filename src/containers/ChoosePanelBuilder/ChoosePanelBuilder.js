@@ -6,10 +6,12 @@ import RestChoiceData from '../../utils/RestChoicesData';
 class choosePanelBuilder extends Component {
 
   state = {
-    res_prices: RestChoiceData.getPrices(),
-    res_types: RestChoiceData.getTypes(),
-    res_times: RestChoiceData.getTimeList(),
-    res_modes: RestChoiceData.getModes()
+    choices: [
+      RestChoiceData.getPrices(),
+      RestChoiceData.getTypes(),
+      RestChoiceData.getTimeList(),
+      RestChoiceData.getModes()
+    ]
   };
 
   onSelectorChange = (targetIndex) => {

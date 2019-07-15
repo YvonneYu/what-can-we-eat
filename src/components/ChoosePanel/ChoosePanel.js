@@ -1,17 +1,11 @@
 import React from 'react';
+import ChoiceSelectors from './ChoiceSelectors';
 import './ChoosePanel.scss';
 
 const choosePanel  = (props) => {
 
-  let selectorInputCom = props.res_prices.data.map( (value, index) => {
-    let id = 'checkbox'+ index;
-    return (
-      <React.Fragment key={index}>
-        <input id={ id } type="checkbox"
-               checked={ value.checked } onChange={ () => props.onSelect(index) } />
-        <label className="button" htmlFor={ id } >{ value.label }</label>
-      </React.Fragment>
-    )
+  let selectorsItems = props.choices.map((choice, index) => {
+    return <ChoiceSelectors key={ index } list={ choice.data } label={ choice.label }></ChoiceSelectors>;
   });
 
   return (
@@ -21,11 +15,7 @@ const choosePanel  = (props) => {
           <input type="text" name="res_name" id="res_name" placeholder="請輸入餐廳名稱..."/>
         </lable>
       </div>
-      <div className="grid-x grid-padding-x panel-select">
-        <fieldset className="large-5 cell">{props.res_prices.label}
-          { selectorInputCom }
-        </fieldset>
-      </div>
+      { selectorsItems }
       <div>
         <input type="submit" value="送出" />
       </div>
