@@ -5,14 +5,19 @@ import './ChoosePanel.scss';
 const choosePanel  = (props) => {
 
   let selectorsItems = props.choices.map((choice, index) => {
-    return <ChoiceSelectors key={ index } list={ choice.data } label={ choice.label }></ChoiceSelectors>;
+    return <ChoiceSelectors key={ index }
+                            type={ choice.type }
+                            list={ choice.data }
+                            onChange={ props.onSelectorChange }
+                            label={ choice.label }>
+          </ChoiceSelectors>;
   });
 
   return (
     <form onSubmit={ props.onSubmit }>
       <div className="grid-x grid-padding-x">
         <div className="cell">
-          <lable htmlFor="res_name">餐廳名稱</lable>
+          <label htmlFor="res_name">餐廳名稱</label>
           <input type="text" name="res_name" id="res_name" placeholder="請輸入餐廳名稱..."/>
         </div>
       </div>

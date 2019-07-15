@@ -9,13 +9,20 @@ class choosePanelBuilder extends Component {
     choices: RestChoiceData.getChoiceData()
   };
 
-  onChoiceSelectorChange = (targetIndex) => {
-    let newValues = this.state.res_prices.data.map((value, i) => {
-        return targetIndex !== i ? value: {...value, checked: !value.checked};
+  onChoiceSelectorChange = (targetType, targetIndex) => {
+    const newChoices = this.state.choices.map((choice) => {
+        // find target choice by type
+        if ( choice.type === targetType ) {
+            // update data by targetIndex, if not target, return original value
+            let newChoiceData = choice.data.map( (value, i) => {
+                return targetIndex !== i ? value: {...value, checked: !value.checked};
+            });
+            return {...choice, data: newChoiceData};
+        }
+      // not target choice, return original one
+      return choice;
     });
-    let newPrices = RestChoiceData.getPrices();
-    newPrices.data = newValues;
-    this.setState( { res_prices: newPrices });
+    this.setState( { choices: newChoices });
   };
 
   handleSubmit = (e) => {
@@ -29,7 +36,7 @@ class choosePanelBuilder extends Component {
           <ChoosePanel
             {...this.state}
             onSubmit={this.handleSubmit}
-            onSelect={this.onChoiceSelectorChange}
+            onSelectorChange={this.onChoiceSelectorChange}
           ></ChoosePanel>
         </div>
       );
