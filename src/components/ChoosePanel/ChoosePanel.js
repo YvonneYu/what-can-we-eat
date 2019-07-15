@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ChoosePanel.scss';
+import './ChoosePanel.scss';
 
 const choosePanel  = (props) => {
 
