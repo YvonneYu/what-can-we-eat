@@ -6,8 +6,8 @@ const choosePanel  = (props) => {
   let selectorInputCom = props.priceValues.map( (value, index) => {
     let id = 'checkbox'+ index;
     return (
-      <React.Fragment>
-        <input key={index} id={ id } type="checkbox"
+      <React.Fragment key={index}>
+        <input id={ id } type="checkbox"
                checked={ value.checked } onChange={ () => props.onSelect(index) } />
         <label className="button" htmlFor={ id } >{ value.label }</label>
       </React.Fragment>
