@@ -4,11 +4,15 @@ import './Restaurant.scss';
 
 const restaurant = (props) => {
   return (
-        <tr>
-          <td>{props.name}</td>
-          <td> { props.tel? (<a href={ 'tel:' + props.tel }>{props.tel}</a>) : null}</td>
-          <td> {props.address} </td>
-        </tr>
+    <div className="cell">
+      <div className="card">
+          <div className="card-section">
+            <p>名稱：{props.name} </p>
+            <p>電話：{ props.tel? (<a href={ 'tel:' + props.tel }>{props.tel}</a>) : null}</p>
+            <p>地址：{props.address} </p>
+          </div>
+      </div>
+    </div>
   )
 };
 
