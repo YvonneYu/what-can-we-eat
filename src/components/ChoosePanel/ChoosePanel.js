@@ -1,6 +1,6 @@
 import React from 'react';
 import ChoiceSelectors from './ChoiceSelectors';
-import RestaurantInputs from './RestaurantInputs';
+import RestaurantInput from './RestaurantInput';
 import './ChoosePanel.scss';
 
 const choosePanel  = (props) => {
@@ -14,12 +14,26 @@ const choosePanel  = (props) => {
           </ChoiceSelectors>;
   });
 
+  let resItems = [];
+  for (let key in props.resInfo) {
+    resItems.push({
+      ...props.resInfo[key],
+      id: key
+    })
+  }
+
   return (
     <form onSubmit={ props.onSubmit }>
-      <RestaurantInputs
-        onChange={ props.onInfoChange }
-        value={ props.resInfo }>
-      </RestaurantInputs>
+      <div className="grid-x grid-padding-x">
+          {
+            resItems.map((resInput, index) => {
+              return (
+                <RestaurantInput key={ index } {...resInput}
+                                 onChange={ props.onInfoChange }>
+                </RestaurantInput>)
+            })
+          }
+      </div>
       { selectorsItems }
       <div>
         <input type="submit" value="送出" />

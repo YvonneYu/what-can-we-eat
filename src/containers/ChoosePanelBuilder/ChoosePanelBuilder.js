@@ -8,9 +8,30 @@ class choosePanelBuilder extends Component {
   state = {
     choices: RestChoiceData.getChoiceData(),
     resInfo: {
-      name: '',
-      tel:'',
-      address:''
+      name: {
+        value: '',
+        label: '名稱',
+        type: 'text',
+        placeholder: '請輸入餐廳名稱...',
+        isValid: true,
+        isRequired: true
+      },
+      tel: {
+        value: '',
+        label: '電話',
+        type: 'tel',
+        placeholder: '請輸入餐廳電話...',
+        isValid: true,
+        isRequired: true
+      },
+      address: {
+        value: '',
+        label: '地址',
+        type: 'text',
+        placeholder: '請輸入餐廳地址...',
+        isValid: true,
+        isRequired: true
+      }
     }
   };
 
@@ -30,15 +51,15 @@ class choosePanelBuilder extends Component {
     this.setState( { choices: newChoices });
   };
 
-  onInfoChange = (event, inputName) => {
+  onInfoChange = (event, inputKey) => {
      let newResInfo = {...this.state.resInfo};
-      newResInfo[inputName] = event.target.value;
-    this.setState( { resInfo: newResInfo });
+     newResInfo[inputKey] = { ...newResInfo[inputKey], value: event.target.value};
+     this.setState( { resInfo: newResInfo });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+    console.log(this.state.resInfo);
   };
 
   render() {
