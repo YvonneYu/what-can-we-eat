@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ChoosePanel from '../../components/ChoosePanel/ChoosePanel';
+import './ChoosePanelBuilder.scss';
 
 class choosePanelBuilder extends Component {
 
@@ -32,14 +33,17 @@ class choosePanelBuilder extends Component {
     console.log(e);
   };
 
-  render () {
-    return <ChoosePanel
-      {...this.state}
-      onSubmit={ this.handleSubmit}
-      onSelect={ this.onSelectorChange }
-    ></ChoosePanel>;
+  render() {
+    return (
+        <div className="main-selector-panel">
+          <ChoosePanel
+            {...this.state}
+            onSubmit={this.handleSubmit}
+            onSelect={this.onSelectorChange}
+          ></ChoosePanel>
+        </div>
+      );
   }
-
 }
 
 export default choosePanelBuilder;
