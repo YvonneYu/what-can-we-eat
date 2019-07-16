@@ -2,7 +2,7 @@ import { ADD_REST, DELETE_REST, FIND_REST } from '../constants/ActionTypes';
 
 const initialState = [];
 
-let restaurants = (state = initialState, action) => {
+let restaurant = (state = initialState, action) => {
   switch (action.type) {
     case ADD_REST:
       return [
@@ -24,4 +24,4 @@ let restaurants = (state = initialState, action) => {
   }
 };
 
-export default restaurants;
+export default restaurant;
