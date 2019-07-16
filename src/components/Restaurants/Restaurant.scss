@@ -1,9 +1,11 @@
-.restaurant {
-    margin: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 1px;
+.card {
+    box-shadow: 2px 2px 5px #cccccc;
 }
 
 .card-size {
-    min-height: 180px;
+    min-height: 220px;
+}
+
+.button-group .button {
+    margin: 0 2px;
 }
