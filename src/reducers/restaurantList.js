@@ -19,6 +19,10 @@ let restaurant = (state = initialState, action) => {
       return state.filter(res =>
         res.id !== action.id
       );
+    case FIND_REST:
+      return state.find( res =>
+        res.id === action.id
+      );
     default:
       return state;
   }
