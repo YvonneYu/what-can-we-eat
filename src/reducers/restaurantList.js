@@ -1,7 +1,27 @@
 import * as actionTypes from '../constants/ActionTypes';
 import storage from '../api/restaurantStorage';
+import uuid from "uuid/v4";
 
-const initialState = [];
+// use fake one now
+const initialState = [
+  {
+    id: uuid(),
+    name: 'test1 餐廳',
+    tel: '021234567',
+    choices: []
+  },
+  {
+    id: uuid(),
+    name: 'test2 餐廳',
+    address: '測試的地址要很長測試的地址要很長',
+    choices: []
+  },
+  {
+    id: uuid(),
+    name: 'test333333333333 餐廳',
+    choices: []
+  }
+];
 
 let restaurantList = (state = initialState, action) => {
   switch (action.type) {
