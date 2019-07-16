@@ -11,26 +11,32 @@ class choosePanelBuilder extends Component {
       name: {
         value: '',
         label: '*名稱',
-        type: 'text',
-        placeholder: '請輸入餐廳名稱...',
-        errorMessage: '此欄位為必填',
+        inputProps: {
+          type: 'text',
+          placeholder: '請輸入餐廳名稱...',
+          errorMessage: '此欄位為必填'
+        },
         isValid: true,
         isRequired: true
       },
       tel: {
         value: '',
         label: '電話',
-        type: 'tel',
-        placeholder: '請輸入餐廳電話...',
-        errorMessage: '此欄位必須為數字',
+        inputProps: {
+          type: 'tel',
+          placeholder: '請輸入餐廳電話...',
+          errorMessage: '此欄位必須為數字'
+        },
         isValid: true,
         isRequired: false
       },
       address: {
         value: '',
         label: '地址',
-        type: 'text',
-        placeholder: '請輸入餐廳地址...',
+        inputProps: {
+          type: 'text',
+          placeholder: '請輸入餐廳地址...'
+        },
         isValid: true,
         isRequired: false
       }
@@ -62,7 +68,7 @@ class choosePanelBuilder extends Component {
         isValid = trimValue !== '';
     }
     // 簡單檢查 tel input 是否是 number
-    if (rules.type === 'tel') {
+    if (rules.inputProps.type === 'tel') {
         isValid = (!isNaN(parseFloat(trimValue)) && isFinite(trimValue)) || (trimValue === '');
     }
     return isValid;

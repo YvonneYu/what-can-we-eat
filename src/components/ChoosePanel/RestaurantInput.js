@@ -5,10 +5,10 @@ const restaurantInput = (props) => {
   let labelName = 'res_' + props.id;
   return (
     <div className="cell">
-      <label htmlFor={ labelName }>{ props.label } { props.isValid ? null : <span className="form-error"> { props.errorMessage } </span> } </label>
-      <input type={ props.type } name={ labelName } id={ labelName } value={ props.value }
+      <label htmlFor={ labelName }>{ props.label } { props.isValid ? null : <span className="form-error"> { props.inputProps.errorMessage } </span> } </label>
+      <input type={ props.inputProps.type } name={ labelName } id={ labelName } value={ props.value }
              onChange={ (event) => props.onChange(event, props.id) }
-             placeholder={props.placeholder} />
+             placeholder={props.inputProps.placeholder} />
     </div>
    )
 };
