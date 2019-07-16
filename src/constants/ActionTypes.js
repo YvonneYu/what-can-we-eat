@@ -1,4 +1,16 @@
-export const ADD_RES = 'ADD_RES';
-export const DELETE_RES = 'DELETE_RES';
-export const EDIT_RES = 'EDIT_RES';
-export const FIND_RES = 'FIND_RES';
+export const ADD_REST = 'ADD_REST';
+export const DELETE_REST = 'DELETE_REST';
+export const FIND_REST = 'FIND_REST';
+
+export const SAVE_REST_LIST = 'SAVE_REST_LIST';
+export const GET_REST_LIST = 'GET_REST_LIST';
+export const FILTER_REST_LIST = 'FILTER_REST_LIST';
+export const CLEAR_REST_LIST = 'CLEAR_REST_LIST';
+
+// defined what kind of choices we want for eat, to select restaurants
+export const resChoicesTypes = {
+  REST_PRICE: 'REST_PRICE',
+  REST_STYLE: 'REST_STYLE',
+  REST_TIME: 'REST_TIME',
+  REST_MODE: 'REST_MODE'
+};
