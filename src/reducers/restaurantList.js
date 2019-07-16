@@ -1,10 +1,11 @@
-import { ADD_REST, DELETE_REST, FIND_REST } from '../constants/ActionTypes';
+import * as actionTypes from '../constants/ActionTypes';
+import storage from '../api/restaurantStorage';
 
 const initialState = [];
 
-let restaurant = (state = initialState, action) => {
+let restaurantList = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_REST:
+    case actionTypes.ADD_REST:
       return [
         ...state,
         {
@@ -15,17 +16,31 @@ let restaurant = (state = initialState, action) => {
           choices: action.rest.choices
         }
       ];
-    case DELETE_REST:
+    case actionTypes.DELETE_REST:
       return state.filter(res =>
         res.id !== action.id
       );
-    case FIND_REST:
+    case actionTypes.FIND_REST:
       return state.find( res =>
         res.id === action.id
       );
+    case actionTypes.GET_REST_LIST:
+      return state;
+    case actionTypes.SAVE_REST_LIST:
+      return state;
+    case actionTypes.FILTER_REST_LIST:
+      let targetChoices = action.choices;
+      return state.filter(res => {
+        // if res choice is empty, default in the list
+        if (res.choices.length === 0) return true;
+        // return list if this res match one of choices
+        res.choices.forEach( choice => {
+           return targetChoices.has(choice);
+        });
+      });
     default:
       return state;
   }
 };
 
-export default restaurant;
+export default restaurantList;
