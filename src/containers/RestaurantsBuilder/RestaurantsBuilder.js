@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { deleteRest } from '../../actions/actions';
+import { deleteRest, mapChoicesInputsFromRest } from '../../actions/actions';
 import Restaurant from '../../components/Restaurants/Restaurant';
 
 class restaurantsBuilder extends Component {
   render() {
     let resComponent = null;
     let handleDelete = this.props.onDelete;
+    let handleEdit = this.props.onEdit;
 
     if (this.props.restList.length) {
       resComponent = this.props.restList.map(function (res) {
-        return <Restaurant key={res.id} {...res} onDelete={ handleDelete }></Restaurant>;
+        return <Restaurant key={res.id} {...res}
+                           onDelete={ handleDelete }
+                           onEdit={ handleEdit }>
+
+               </Restaurant>;
       });
     } else {
       resComponent = <p>很抱歉，無搜尋結果...</p>;
@@ -31,6 +36,9 @@ const mapStateToProps = state => ({
 );
 
 const mapDispatchToProps = (dispatch) => ({
+    onEdit: (rest) => {
+      dispatch(mapChoicesInputsFromRest(rest))
+    },
     onDelete: (id) => {
       dispatch(deleteRest(id))
     }

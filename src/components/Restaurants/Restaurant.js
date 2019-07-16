@@ -15,7 +15,7 @@ const restaurant = (props) => {
         <div className="grid-x align-center">
           <div className="small button-group cell small-5">
             <a className="button alert" onClick={ () => props.onDelete(props.id) }>刪除</a>
-            <a className="button">編輯</a>
+            <a className="button" onClick={ () => props.onEdit(props) }>編輯</a>
           </div>
         </div>
       </div>

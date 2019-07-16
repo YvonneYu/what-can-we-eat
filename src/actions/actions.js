@@ -24,6 +24,10 @@ export const resetChoices = () => (
   { type: types.RESET_ALL_CHOICES}
 );
 
+export const mapChoicesInputsFromRest = (rest) => (
+  { type: types.MAP_CHOICES_INPUTS, rest}
+);
+
 export const findRest = id => (
   { type: types.FIND_REST, id }
 );
