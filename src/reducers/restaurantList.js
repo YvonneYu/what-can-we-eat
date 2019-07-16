@@ -6,9 +6,9 @@ import uuid from "uuid/v4";
 const initialState = [
   {
     id: uuid(),
-    name: 'test1 餐廳',
-    tel: '021234567',
-    choices: []
+    name: '麥當勞',
+    tel: '',
+    choices: ['便宜', '速食', '垃圾食物', '全天', '有外帶']
   },
   {
     id: uuid(),
