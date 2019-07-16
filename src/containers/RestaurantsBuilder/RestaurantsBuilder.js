@@ -26,7 +26,7 @@ class restaurantsBuilder extends Component {
 }
 
 const mapStateToProps = state => ({
-    restList: state
+    restList: state.restaurantList
   }
 );
 

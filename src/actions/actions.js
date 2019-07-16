@@ -12,6 +12,18 @@ export const deleteRest = id => (
   { type: types.DELETE_REST, id }
 );
 
+export const setChoices = choices => (
+  { type: types.SET_CHOICES, choices }
+);
+
+export const setRestInputValues = info => (
+  { type: types.SET_REST_INPUT_VALUES, restInfo: info }
+);
+
+export const resetChoices = () => (
+  { type: types.RESET_ALL_CHOICES}
+);
+
 export const findRest = id => (
   { type: types.FIND_REST, id }
 );

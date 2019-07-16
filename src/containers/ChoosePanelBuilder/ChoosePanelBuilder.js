@@ -1,55 +1,13 @@
 import React, { Component } from 'react';
 import ChoosePanel from '../../components/ChoosePanel/ChoosePanel';
 import './ChoosePanelBuilder.scss';
-import RestChoiceData from '../../utils/RestChoicesData';
-import { addRest } from "../../actions/actions";
+import * as actions from "../../actions/actions";
 import {connect} from "react-redux";
 
 class choosePanelBuilder extends Component {
 
-  state = {
-    choices: RestChoiceData.getChoiceData(),
-    resInfo: {
-      name: {
-        value: '',
-        label: '*名稱',
-        inputProps: {
-          type: 'text',
-          placeholder: '請輸入餐廳名稱...',
-          errorMessage: '此欄位為必填'
-        },
-        isValid: false,
-        isRequired: true,
-        showInCreationMode: true
-      },
-      tel: {
-        value: '',
-        label: '電話',
-        inputProps: {
-          type: 'tel',
-          placeholder: '請輸入餐廳電話...',
-          errorMessage: '此欄位必須為數字'
-        },
-        isValid: true,
-        isRequired: false,
-        showInCreationMode: false
-      },
-      address: {
-        value: '',
-        label: '地址',
-        inputProps: {
-          type: 'text',
-          placeholder: '請輸入餐廳地址...'
-        },
-        isValid: true,
-        isRequired: false,
-        showInCreationMode: false
-      }
-    }
-  };
-
   onChoiceSelectorChange = (targetType, targetIndex) => {
-    const newChoices = this.state.choices.map((choice) => {
+    const newChoices = this.props.choices.map((choice) => {
         // find target choice by type
         if ( choice.type === targetType ) {
             // update data by targetIndex, if not target, return original value
@@ -61,7 +19,7 @@ class choosePanelBuilder extends Component {
       // not target choice, return original one
       return choice;
     });
-    this.setState( { choices: newChoices });
+    this.props.setChoices(newChoices);
   };
 
   validateInput = (value, rules) => {
@@ -81,23 +39,23 @@ class choosePanelBuilder extends Component {
 
   isValidToCreate = () => {
     let isAllValid = true;
-    for (let type in this.state.resInfo ) {
-      isAllValid = this.state.resInfo[type].isValid && isAllValid;
+    for (let type in this.props.restInfo ) {
+      isAllValid = this.props.restInfo[type].isValid && isAllValid;
     }
     return isAllValid;
   };
 
   onInfoChange = (event, inputKey) => {
-     let newResInfo = {...this.state.resInfo};
+     let newRestInfo = {...this.props.restInfo};
      let newValue = event.target.value;
-     let isValid = this.validateInput(newValue, newResInfo[inputKey]);
-     newResInfo[inputKey] = { ...newResInfo[inputKey], value: newValue, isValid: isValid};
-     this.setState( { resInfo: newResInfo });
+     let isValid = this.validateInput(newValue, newRestInfo[inputKey]);
+     newRestInfo[inputKey] = { ...newRestInfo[inputKey], value: newValue, isValid: isValid};
+     this.props.setRestInfo(newRestInfo);
   };
 
   getCheckedChoices = () => {
     // get data structure like ['心情', '天氣熱']
-    return this.state.choices.reduce( (checkedList, choices) => {
+    return this.props.choices.reduce( (checkedList, choices) => {
       // concat all for choices type
       return checkedList.concat(choices.data.filter((choice) => {
               // find checked object
@@ -116,20 +74,20 @@ class choosePanelBuilder extends Component {
       return;
     }
     let newRest = {
-      name: this.state.resInfo.name.value,
-      tel: this.state.resInfo.tel.value,
-      address: this.state.resInfo.address.value,
+      name: this.props.restInfo.name.value,
+      tel: this.props.restInfo.tel.value,
+      address: this.props.restInfo.address.value,
       choices: this.getCheckedChoices()
     };
     this.props.handleCreateRest(newRest);
-    this.setState( { choices: RestChoiceData.getChoiceData() });
+    this.props.resetChoicesAndRestInfo();
   };
 
   render() {
     return (
         <div className="main-selector-panel">
           <ChoosePanel
-            {...this.state}
+            {...this.props}
             isCreationMode={false}
             onSubmit={this.handleSubmit}
             onInfoChange={ this.onInfoChange }
@@ -140,10 +98,24 @@ class choosePanelBuilder extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  choices: state.choicesPanel.choices,
+  restInfo: state.choicesPanel.restInfo
+});
+
 const mapDispatchToProps = (dispatch) => ({
   handleCreateRest: (rest) => {
-    dispatch(addRest(rest))
+    dispatch(actions.addRest(rest))
+  },
+  setChoices: (choices) => {
+    dispatch(actions.setChoices(choices));
+  },
+  setRestInfo: (restInfo) => {
+    dispatch(actions.setRestInputValues(restInfo));
+  },
+  resetChoicesAndRestInfo: () => {
+    dispatch(actions.resetChoices())
   }
 });
 
-export default connect(null, mapDispatchToProps)(choosePanelBuilder);
+export default connect(mapStateToProps, mapDispatchToProps)(choosePanelBuilder);

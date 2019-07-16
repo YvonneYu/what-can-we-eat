@@ -1,9 +1,9 @@
-import { GET_DEFAULT_CHOICES, RESET_CHOICES } from '../constants/ActionTypes';
+import { SET_CHOICES, RESET_ALL_CHOICES, SET_REST_INPUT_VALUES } from '../constants/ActionTypes';
 import RestChoiceData from "../utils/RestChoicesData";
 
 const initialState = {
   choices: RestChoiceData.getChoiceData(),
-  resInfo: {
+  restInfo: {
     name: {
       value: '',
         label: '*名稱',
@@ -44,15 +44,16 @@ const initialState = {
 
 let choicesPanel = (state = initialState, action) => {
   switch (action.type) {
-    case GET_DEFAULT_CHOICES:
-      return {...initialState};
-    case RESET_CHOICES:
+    case SET_CHOICES:
+      return { ...state, choices: action.choices };
+    case SET_REST_INPUT_VALUES:
+      return {...state, restInfo: action.restInfo };
+    case RESET_ALL_CHOICES:
       state = {...initialState};
       return state;
     default:
       return state;
   }
-
 };
 
 export default choicesPanel;

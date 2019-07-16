@@ -4,7 +4,6 @@ import RestaurantInput from './RestaurantInput';
 import './ChoosePanel.scss';
 
 const choosePanel  = (props) => {
-
   let selectorsItems = props.choices.map((choice, index) => {
     return <ChoiceSelectors key={ index }
                             type={ choice.type }
@@ -15,8 +14,8 @@ const choosePanel  = (props) => {
   });
 
   let resItems = [];
-  for (let key in props.resInfo) {
-    let currentInfo = props.resInfo[key];
+  for (let key in props.restInfo) {
+    let currentInfo = props.restInfo[key];
     // 在 creation mode 時，非創建 input 不用顯示
     if (props.isCreationMode && !currentInfo.showInCreationMode) {
       break;
