@@ -16,8 +16,13 @@ const choosePanel  = (props) => {
 
   let resItems = [];
   for (let key in props.resInfo) {
+    let currentInfo = props.resInfo[key];
+    // 在 creation mode 時，非創建 input 不用顯示
+    if (props.isCreationMode && !currentInfo.showInCreationMode) {
+      break;
+    }
     resItems.push({
-      ...props.resInfo[key],
+      ...currentInfo,
       id: key
     })
   }

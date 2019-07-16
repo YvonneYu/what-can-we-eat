@@ -17,7 +17,8 @@ class choosePanelBuilder extends Component {
           errorMessage: '此欄位為必填'
         },
         isValid: true,
-        isRequired: true
+        isRequired: true,
+        showInCreationMode: true
       },
       tel: {
         value: '',
@@ -28,7 +29,8 @@ class choosePanelBuilder extends Component {
           errorMessage: '此欄位必須為數字'
         },
         isValid: true,
-        isRequired: false
+        isRequired: false,
+        showInCreationMode: false
       },
       address: {
         value: '',
@@ -38,7 +40,8 @@ class choosePanelBuilder extends Component {
           placeholder: '請輸入餐廳地址...'
         },
         isValid: true,
-        isRequired: false
+        isRequired: false,
+        showInCreationMode: false
       }
     }
   };
@@ -92,6 +95,7 @@ class choosePanelBuilder extends Component {
         <div className="main-selector-panel">
           <ChoosePanel
             {...this.state}
+            isCreationMode={false}
             onSubmit={this.handleSubmit}
             onInfoChange={ this.onInfoChange }
             onSelectorChange={this.onChoiceSelectorChange}>
