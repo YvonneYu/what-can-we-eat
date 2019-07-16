@@ -27,7 +27,3 @@ export const getRestList = () => (
 export const filterRestList = (choices) => (
   { type: types.FILTER_REST_LIST, choices }
 );
-
-export const clearRestList = () => (
-  { type: types.CLEAR_REST_LIST }
-);
