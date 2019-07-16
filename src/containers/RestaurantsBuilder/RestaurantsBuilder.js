@@ -1,22 +1,13 @@
 import React, {Component} from 'react';
-import uuid from 'uuid/v4';
+import { connect } from 'react-redux'
 import Restaurant from '../../components/Restaurants/Restaurant';
-import { createStore } from 'redux';
-import restaurantList from '../../reducers/restaurantList';
-
-let store = createStore(restaurantList);
 
 class restaurantsBuilder extends Component {
-
-  state = {
-    res: store.getState()
-  };
-
   render() {
     let resComponent = null;
 
-    if (this.state.res.length) {
-      resComponent = this.state.res.map(function (res, index) {
+    if (this.props.restList.length) {
+      resComponent = this.props.restList.map(function (res) {
         return <Restaurant key={res.id} {...res}></Restaurant>;
       });
     } else {
@@ -32,4 +23,9 @@ class restaurantsBuilder extends Component {
   }
 }
 
-export default restaurantsBuilder;
+const mapStateToProps = state => ({
+    restList: state
+  }
+);
+
+export default connect(mapStateToProps)(restaurantsBuilder);
