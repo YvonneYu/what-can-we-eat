@@ -13,7 +13,8 @@ export default {
         resolve(list && JSON.parse(list));
       }, TIMEOUT);
     }),
-  saveRestList: (value) => {
+  saveRestList: (value, callback= () => {}) => {
     localStorage.setItem(STORE_ID, JSON.stringify(value));
+    callback();
   }
 }
