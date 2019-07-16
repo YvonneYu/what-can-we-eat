@@ -1,5 +1,4 @@
 import { ADD_REST, DELETE_REST, FIND_REST } from '../constants/ActionTypes';
-import uuid from "uuid/v4";
 
 const initialState = [];
 
@@ -9,11 +8,11 @@ let restaurants = (state = initialState, action) => {
       return [
         ...state,
         {
-          id: uuid(),
-          name: action.name,
-          tel: action.tel,
-          address: action.address,
-          choices: action.choices
+          id: action.rest.id,
+          name: action.rest.name,
+          tel: action.rest.tel,
+          address: action.rest.address,
+          choices: action.rest.choices
         }
       ];
     case DELETE_REST:
