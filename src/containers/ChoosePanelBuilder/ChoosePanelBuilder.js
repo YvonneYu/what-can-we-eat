@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import ChoosePanel from '../../components/ChoosePanel/ChoosePanel';
 import './ChoosePanelBuilder.scss';
 import RestChoiceData from '../../utils/RestChoicesData';
+import { addRest } from "../../actions/actions";
+import {deleteRest} from "../../actions/actions";
+import {connect} from "react-redux";
 
 class choosePanelBuilder extends Component {
 
@@ -16,7 +19,7 @@ class choosePanelBuilder extends Component {
           placeholder: '請輸入餐廳名稱...',
           errorMessage: '此欄位為必填'
         },
-        isValid: true,
+        isValid: false,
         isRequired: true,
         showInCreationMode: true
       },
@@ -77,6 +80,14 @@ class choosePanelBuilder extends Component {
     return isValid;
   };
 
+  isValidToCreate = () => {
+    let isAllValid = true;
+    for (let type in this.state.resInfo ) {
+      isAllValid = this.state.resInfo[type].isValid && isAllValid;
+    }
+    return isAllValid;
+  };
+
   onInfoChange = (event, inputKey) => {
      let newResInfo = {...this.state.resInfo};
      let newValue = event.target.value;
@@ -85,9 +96,34 @@ class choosePanelBuilder extends Component {
      this.setState( { resInfo: newResInfo });
   };
 
+  getCheckedChoices = () => {
+    // get data structure like ['心情', '天氣熱']
+    return this.state.choices.reduce( (checkedList, choices) => {
+      // concat all for choices type
+      return checkedList.concat(choices.data.filter((choice) => {
+              // find checked object
+              return choice.checked;
+          }).reduce((list, obj) => {
+            // reduce to one single label
+            return obj.label;
+          },[]))
+    }, []);
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state.resInfo);
+    if (!this.isValidToCreate()) {
+      alert('資料有誤！不能新增！');
+      return;
+    }
+    let newRest = {
+      name: this.state.resInfo.name.value,
+      tel: this.state.resInfo.tel.value,
+      address: this.state.resInfo.address.value,
+      choices: this.getCheckedChoices()
+    };
+    this.props.handleCreateRest(newRest);
+    this.setState( { choices: RestChoiceData.getChoiceData() });
   };
 
   render() {
@@ -105,4 +141,10 @@ class choosePanelBuilder extends Component {
   }
 }
 
-export default choosePanelBuilder;
+const mapDispatchToProps = (dispatch) => ({
+  handleCreateRest: (rest) => {
+    dispatch(addRest(rest))
+  }
+});
+
+export default connect(null, mapDispatchToProps)(choosePanelBuilder);

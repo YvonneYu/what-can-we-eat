@@ -1,5 +1,4 @@
 import * as actionTypes from '../constants/ActionTypes';
-import storage from '../api/restaurantStorage';
 import uuid from "uuid/v4";
 
 // use fake one now
