@@ -3,7 +3,6 @@ import ChoosePanel from '../../components/ChoosePanel/ChoosePanel';
 import './ChoosePanelBuilder.scss';
 import RestChoiceData from '../../utils/RestChoicesData';
 import { addRest } from "../../actions/actions";
-import {deleteRest} from "../../actions/actions";
 import {connect} from "react-redux";
 
 class choosePanelBuilder extends Component {

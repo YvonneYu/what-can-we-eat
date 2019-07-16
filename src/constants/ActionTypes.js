@@ -6,6 +6,9 @@ export const SAVE_REST_LIST = 'SAVE_REST_LIST';
 export const GET_REST_LIST = 'GET_REST_LIST';
 export const FILTER_REST_LIST = 'FILTER_REST_LIST';
 
+export const GET_DEFAULT_CHOICES = 'GET_DEFAULT_CHOICES';
+export const RESET_CHOICES = 'RESET_CHOICES';
+
 // defined what kind of choices we want for eat, to select restaurants
 export const resChoicesTypes = {
   REST_PRICE: 'REST_PRICE',
