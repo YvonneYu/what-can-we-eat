@@ -18,9 +18,10 @@ const ChoiceSelectors  = (props) => {
 
   return (
     <div className="grid-x grid-padding-x panel-select">
-      <fieldset className="cell">{ props.label }
+      <div className="cell">
+        <label>{ props.label }</label>
         { selectorInputCom }
-      </fieldset>
+      </div>
     </div>
   )
 };
