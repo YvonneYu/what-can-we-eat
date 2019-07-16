@@ -36,7 +36,13 @@ const choosePanel  = (props) => {
       </div>
       { selectorsItems }
       <div>
-        <input type="submit" value="送出" />
+        <div className="grid-container">
+          <div className="grid-x grid-margin-x">
+            <fieldset className="cell large-6">
+              <button className="button success" type="submit" value="Submit">送出</button>
+            </fieldset>
+          </div>
+        </div>
       </div>
     </form>
   )
