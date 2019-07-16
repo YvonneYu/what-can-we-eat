@@ -9,16 +9,19 @@ class restaurantsBuilder extends Component {
       {
         id: uuid(),
         name: 'test1 餐廳',
-        tel: '021234567'
+        tel: '021234567',
+        choices: []
       },
       {
         id: uuid(),
         name: 'test2 餐廳',
-        address: '測試的地址要很長測試的地址要很長'
+        address: '測試的地址要很長測試的地址要很長',
+        choices: []
       },
       {
         id: uuid(),
-        name: 'test333333333333 餐廳'
+        name: 'test333333333333 餐廳',
+        choices: []
       }
     ]
   };
