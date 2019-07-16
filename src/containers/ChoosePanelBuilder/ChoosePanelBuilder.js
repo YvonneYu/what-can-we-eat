@@ -63,7 +63,7 @@ class choosePanelBuilder extends Component {
     }
     // 簡單檢查 tel input 是否是 number
     if (rules.type === 'tel') {
-        isValid = !isNaN(parseFloat(trimValue)) && isFinite(trimValue);
+        isValid = (!isNaN(parseFloat(trimValue)) && isFinite(trimValue)) || (trimValue === '');
     }
     return isValid;
   };
