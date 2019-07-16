@@ -11,8 +11,8 @@ const restaurant = (props) => {
           <p>電話：{props.tel ? (<a href={'tel:' + props.tel}>{props.tel}</a>) : null}</p>
           <p>地址：{props.address} </p>
         </div>
-        <div className="grid-x align-right">
-          <div className="small button-group cell small-6">
+        <div className="grid-x align-center">
+          <div className="small button-group cell small-5">
             <a className="button alert">刪除</a>
             <a className="button">編輯</a>
           </div>
