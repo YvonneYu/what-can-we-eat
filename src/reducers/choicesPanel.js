@@ -1,4 +1,8 @@
-import { SET_CHOICES, RESET_ALL_CHOICES, SET_REST_INPUT_VALUES, MAP_CHOICES_INPUTS } from '../constants/ActionTypes';
+import { SET_CHOICES,
+         RESET_ALL_CHOICES,
+         SET_REST_INPUT_VALUES,
+         MAP_CHOICES_INPUTS,
+} from '../constants/ActionTypes';
 
 const getCheckedList = (list) => {
   return list.map((item) => {
@@ -67,41 +71,46 @@ const initialState = {
         isRequired: false,
         showInCreationMode: false
     }
-  }
+  },
+  id: '',
+  isEditMode: false
 };
 
+const deepCloneObj = (obj) => JSON.parse(JSON.stringify(obj));
+
 const getMappingChoices = (targetChoices = []) => {
-  let newChoices = [...initialState.choices];
+  let newChoices = [...deepCloneObj(initialState.choices)];
   return newChoices.map( (choice) => {
     let checkedChoices = choice.data.map((currentData) => {
       currentData.checked = targetChoices.includes(currentData.label);
-      return currentData;
+      return {...currentData};
     });
     return {...choice, data: checkedChoices }
   })
 };
 
-let choicesPanel = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SET_CHOICES:
       return { ...state, choices: action.choices };
     case SET_REST_INPUT_VALUES:
       return {...state, restInfo: action.restInfo };
     case RESET_ALL_CHOICES:
-      state = {...initialState};
-      return state;
+      return {...deepCloneObj(initialState)};
     case MAP_CHOICES_INPUTS:
       let rest = action.rest;
-      let newRestInfo = {...initialState.restInfo};
-      newRestInfo['name'].value = rest.name;
-      newRestInfo['name'].isValid = true;
-      newRestInfo['tel'].value = rest.tel || '';
-      newRestInfo['address'].value = rest.address || '';
-      state = {restInfo: newRestInfo, choices: getMappingChoices(rest.choices)};
-      return state;
+      let newRestInfo = {...deepCloneObj(initialState.restInfo)};
+      newRestInfo.name.value = rest.name || '';
+      newRestInfo.name.isValid = true;
+      newRestInfo.tel.value = rest.tel || '';
+      newRestInfo.address.value = rest.address || '';
+      return {
+        id: rest.id,
+        restInfo: newRestInfo,
+        choices: getMappingChoices(rest.choices),
+        isEditMode: true
+      };
     default:
       return state;
   }
 };
-
-export default choicesPanel;

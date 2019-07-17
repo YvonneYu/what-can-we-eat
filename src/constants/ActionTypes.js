@@ -1,4 +1,5 @@
 export const ADD_REST = 'ADD_REST';
+export const EDIT_REST = 'EDIT_REST';
 export const DELETE_REST = 'DELETE_REST';
 
 export const FIND_REST = 'FIND_REST';

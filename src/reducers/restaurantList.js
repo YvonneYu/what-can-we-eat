@@ -22,19 +22,26 @@ const initialState = [
   }
 ];
 
+const getRestObj = (rest) => {
+  return {
+    id: rest.id,
+    name: rest.name,
+    tel: rest.tel,
+    address: rest.address,
+    choices: rest.choices
+  }
+};
+
 let restaurantList = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_REST:
       return [
-        ...state,
-        {
-          id: action.rest.id,
-          name: action.rest.name,
-          tel: action.rest.tel,
-          address: action.rest.address,
-          choices: action.rest.choices
-        }
+        ...state, getRestObj(action.rest)
       ];
+    case actionTypes.EDIT_REST:
+      return state.map((tempRest)=> {
+        return (action.rest.id === tempRest.id ? getRestObj(action.rest) : tempRest);
+      });
     case actionTypes.DELETE_REST:
       return state.filter(res =>
         res.id !== action.id

@@ -56,14 +56,15 @@ class choosePanelBuilder extends Component {
   getCheckedChoices = () => {
     // get data structure like ['心情', '天氣熱']
     return this.props.choices.reduce( (checkedList, choices) => {
+      let result = choices.data.filter((choice) => {
+        // find checked object
+        return choice.checked;
+      }).reduce((accList, obj) => {
+        // reduce to one single label
+        return [...accList, obj.label];
+      },[]);
       // concat all for choices type
-      return checkedList.concat(choices.data.filter((choice) => {
-              // find checked object
-              return choice.checked;
-          }).reduce((list, obj) => {
-            // reduce to one single label
-            return obj.label;
-          },[]))
+      return [...checkedList, ...result];
     }, []);
   };
 
@@ -79,7 +80,13 @@ class choosePanelBuilder extends Component {
       address: this.props.restInfo.address.value,
       choices: this.getCheckedChoices()
     };
-    this.props.handleCreateRest(newRest);
+    if (this.props.isEditMode) {
+      // pass id
+      this.props.handleEditRest(this.props.restId, newRest);
+    } else {
+      // in creation mode
+      this.props.handleCreateRest(newRest);
+    }
     this.props.resetChoicesAndRestInfo();
   };
 
@@ -87,11 +94,12 @@ class choosePanelBuilder extends Component {
     return (
         <div className="main-selector-panel">
           <ChoosePanel
-            {...this.props}
-            isCreationMode={false}
+            choices={ this.props.choices}
+            restInfo={ this.props.restInfo }
+            isEditMode={ this.props.isEditMode }
             onSubmit={this.handleSubmit}
             onInfoChange={ this.onInfoChange }
-            onSelectorChange={this.onChoiceSelectorChange}>
+            onSelectorChange={ this.onChoiceSelectorChange }>
           </ChoosePanel>
         </div>
       );
@@ -100,12 +108,17 @@ class choosePanelBuilder extends Component {
 
 const mapStateToProps = state => ({
   choices: state.choicesPanel.choices,
-  restInfo: state.choicesPanel.restInfo
+  restInfo: state.choicesPanel.restInfo,
+  isEditMode: state.choicesPanel.isEditMode,
+  restId: state.choicesPanel.id
 });
 
 const mapDispatchToProps = (dispatch) => ({
   handleCreateRest: (rest) => {
     dispatch(actions.addRest(rest))
+  },
+  handleEditRest: (id, rest) => {
+    dispatch(actions.editRest(id, rest))
   },
   setChoices: (choices) => {
     dispatch(actions.setChoices(choices));

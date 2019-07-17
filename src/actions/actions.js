@@ -8,6 +8,10 @@ export const addRest = rest => (
   { type: types.ADD_REST, rest: {...rest, id: uuid()} }
 );
 
+export const editRest = (id, rest) => (
+  { type: types.EDIT_REST, rest: {...rest, id} }
+);
+
 export const deleteRest = id => (
   { type: types.DELETE_REST, id }
 );
