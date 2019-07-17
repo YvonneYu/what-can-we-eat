@@ -13,24 +13,12 @@ const choosePanel  = (props) => {
           </ChoiceSelectors>;
   });
 
-  let resItems = [];
-  for (let key in props.restInfo) {
-    let currentInfo = props.restInfo[key];
-    // 在 creation mode 時，非創建 input 不用顯示
-    // if (!props.isEditMode && !currentInfo.showInCreationMode) {
-    //   break;
-    // }
-    resItems.push({
-      ...currentInfo,
-      id: key
-    })
-  }
-
   return (
     <form onSubmit={ props.onSubmit }>
       <div className="grid-x grid-padding-x">
           {
-            resItems.map((resInput, index) => {
+            Object.keys(props.restInfo).map((key, index) => {
+              let resInput = {...props.restInfo[key], id: key};
               return (
                 <RestaurantInput key={ index } {...resInput}
                                  onChange={ props.onInfoChange }>

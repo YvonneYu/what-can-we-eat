@@ -22,7 +22,7 @@ const initialState = [
   }
 ];
 
-const getRestObj = (rest) => {
+const getSingleServiceRest = (rest) => {
   return {
     id: rest.id,
     name: rest.name,
@@ -32,15 +32,15 @@ const getRestObj = (rest) => {
   }
 };
 
-let restaurantList = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_REST:
       return [
-        ...state, getRestObj(action.rest)
+        ...state, getSingleServiceRest(action.rest)
       ];
     case actionTypes.EDIT_REST:
       return state.map((tempRest)=> {
-        return (action.rest.id === tempRest.id ? getRestObj(action.rest) : tempRest);
+        return (action.rest.id === tempRest.id ? getSingleServiceRest(action.rest) : tempRest);
       });
     case actionTypes.DELETE_REST:
       return state.filter(res =>
@@ -64,5 +64,3 @@ let restaurantList = (state = initialState, action) => {
       return state;
   }
 };
-
-export default restaurantList;

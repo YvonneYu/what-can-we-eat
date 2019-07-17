@@ -5,6 +5,7 @@ import { SET_CHOICES,
 } from '../constants/ActionTypes';
 import { deepCloneObj } from '../utils/utils';
 
+// return choices mapping for UI { label, checked }
 const getCheckedList = (list) => {
   return list.map((item) => {
     return {
@@ -77,8 +78,15 @@ const initialState = {
   isEditMode: false
 };
 
+/***
+ * 回傳 UI choices list initialState form service choices data
+ *
+ * ['天氣熱', '西式'] -> [{choices: type, label, choices}]
+ *
+ */
 const getMappingChoices = (targetChoices = []) => {
   let newChoices = [...deepCloneObj(initialState.choices)];
+  // 回傳 UI choices list initialState form service choices data
   return newChoices.map( (choice) => {
     let checkedChoices = choice.data.map((currentData) => {
       currentData.checked = targetChoices.includes(currentData.label);
@@ -86,6 +94,15 @@ const getMappingChoices = (targetChoices = []) => {
     });
     return {...choice, data: checkedChoices }
   })
+};
+
+const getMappingRestInfo = (rest) => {
+  let newRestInfo = {...deepCloneObj(initialState.restInfo)};
+  newRestInfo.name.value = rest.name || '';
+  newRestInfo.name.isValid = true;
+  newRestInfo.tel.value = rest.tel || '';
+  newRestInfo.address.value = rest.address || '';
+  return newRestInfo;
 };
 
 export default (state = initialState, action) => {
@@ -98,16 +115,10 @@ export default (state = initialState, action) => {
       return {...deepCloneObj(initialState)};
     // return a mapping state of edit rest obj
     case MAP_CHOICES_INPUTS:
-      let rest = action.rest;
-      let newRestInfo = {...deepCloneObj(initialState.restInfo)};
-      newRestInfo.name.value = rest.name || '';
-      newRestInfo.name.isValid = true;
-      newRestInfo.tel.value = rest.tel || '';
-      newRestInfo.address.value = rest.address || '';
       return {
-        id: rest.id,
-        restInfo: newRestInfo,
-        choices: getMappingChoices(rest.choices),
+        id: action.rest.id,
+        restInfo: getMappingRestInfo(action.rest),
+        choices: getMappingChoices(action.rest.choices),
         isEditMode: true
       };
     default:

@@ -1,6 +1,6 @@
 import React from 'react';
-import './ChoosePanel.scss';
 import PropTypes from "prop-types";
+import './ChoosePanel.scss';
 
 const ChoiceSelectors  = (props) => {
 

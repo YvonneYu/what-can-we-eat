@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import ChoosePanel from '../../components/ChoosePanel/ChoosePanel';
-import './ChoosePanelBuilder.scss';
-import * as actions from "../../actions/actions";
 import {connect} from "react-redux";
+import ChoosePanel from '../../components/ChoosePanel/ChoosePanel';
+import * as actions from "../../actions/actions";
+import './ChoosePanelBuilder.scss';
 
 class choosePanelBuilder extends Component {
 
-  onChoiceSelectorChange = (targetType, targetIndex) => {
+  // 當選擇面板的按鈕被點擊
+  handleChoiceSelectorChange = (targetType, targetIndex) => {
     const newChoices = this.props.choices.map((choice) => {
         // find target choice by type
         if ( choice.type === targetType ) {
@@ -20,6 +21,15 @@ class choosePanelBuilder extends Component {
       return choice;
     });
     this.props.setChoices(newChoices);
+  };
+
+  // 當三個餐廳 Inputs 被點擊
+  handleInfoChange = (event, inputKey) => {
+    let newRestInfo = {...this.props.restInfo};
+    let newValue = event.target.value;
+    let isValid = this.validateInput(newValue, newRestInfo[inputKey]);
+    newRestInfo[inputKey] = { ...newRestInfo[inputKey], value: newValue, isValid: isValid};
+    this.props.setRestInfo(newRestInfo);
   };
 
   validateInput = (value, rules) => {
@@ -37,21 +47,7 @@ class choosePanelBuilder extends Component {
     return isValid;
   };
 
-  // 檢查全部的 valid state, 如果有 Invalid 情形，return false
-  isValidToSubmit = () => {
-    return Object.keys(this.props.restInfo).reduce((isAllValid, key)=> {
-      return this.props.restInfo[key].isValid && isAllValid;
-    }, true);
-  };
-
-  onInfoChange = (event, inputKey) => {
-     let newRestInfo = {...this.props.restInfo};
-     let newValue = event.target.value;
-     let isValid = this.validateInput(newValue, newRestInfo[inputKey]);
-     newRestInfo[inputKey] = { ...newRestInfo[inputKey], value: newValue, isValid: isValid};
-     this.props.setRestInfo(newRestInfo);
-  };
-
+  // get service like object for choices
   getCheckedChoices = () => {
     // get data structure like ['心情', '天氣熱']
     return this.props.choices.reduce( (checkedList, choices) => {
@@ -65,6 +61,13 @@ class choosePanelBuilder extends Component {
       // concat all for choices type
       return [...checkedList, ...result];
     }, []);
+  };
+
+  // 檢查全部的 valid state, 如果有 Invalid 情形，return false
+  isValidToSubmit = () => {
+    return Object.keys(this.props.restInfo).reduce((isAllValid, key)=> {
+      return this.props.restInfo[key].isValid && isAllValid;
+    }, true);
   };
 
   handleSubmit = (e) => {
@@ -86,6 +89,7 @@ class choosePanelBuilder extends Component {
       // in creation mode
       this.props.handleCreateRest(newRest);
     }
+    //reset all panel choices deeply
     this.props.resetChoicesAndRestInfo();
   };
 
@@ -98,8 +102,8 @@ class choosePanelBuilder extends Component {
             isEditMode={ this.props.isEditMode }
             isValidToSubmit={ this.isValidToSubmit() }
             onSubmit={this.handleSubmit}
-            onInfoChange={ this.onInfoChange }
-            onSelectorChange={ this.onChoiceSelectorChange }>
+            onInfoChange={ this.handleInfoChange }
+            onSelectorChange={ this.handleChoiceSelectorChange }>
           </ChoosePanel>
         </div>
       );
