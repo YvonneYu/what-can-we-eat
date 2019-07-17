@@ -42,7 +42,9 @@ const choosePanel  = (props) => {
       <div>
         <div className="grid-x grid-padding-x align-center submit-button">
           <fieldset className="cell">
-            <button className="button small expanded" type="submit" value="Submit">送出</button>
+            <button className="button small expanded"
+                    type="submit" value="Submit"
+                    disabled={ !props.isValidToSubmit }>送出</button>
           </fieldset>
         </div>
       </div>

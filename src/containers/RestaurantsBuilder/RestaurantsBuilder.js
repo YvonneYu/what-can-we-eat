@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import { deleteRest, mapChoicesInputsFromRest } from '../../actions/actions';
 import Restaurant from '../../components/Restaurants/Restaurant';
+import {deepCloneObj} from "../../utils/utils";
 
 class restaurantsBuilder extends Component {
   render() {

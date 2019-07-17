@@ -37,12 +37,11 @@ class choosePanelBuilder extends Component {
     return isValid;
   };
 
-  isValidToCreate = () => {
-    let isAllValid = true;
-    for (let type in this.props.restInfo ) {
-      isAllValid = this.props.restInfo[type].isValid && isAllValid;
-    }
-    return isAllValid;
+  // 檢查全部的 valid state, 如果有 Invalid 情形，return false
+  isValidToSubmit = () => {
+    return Object.keys(this.props.restInfo).reduce((isAllValid, key)=> {
+      return this.props.restInfo[key].isValid && isAllValid;
+    }, true);
   };
 
   onInfoChange = (event, inputKey) => {
@@ -70,7 +69,7 @@ class choosePanelBuilder extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (!this.isValidToCreate()) {
+    if (!this.isValidToSubmit()) {
       alert('資料有誤！不能新增！');
       return;
     }
@@ -97,6 +96,7 @@ class choosePanelBuilder extends Component {
             choices={ this.props.choices}
             restInfo={ this.props.restInfo }
             isEditMode={ this.props.isEditMode }
+            isValidToSubmit={ this.isValidToSubmit() }
             onSubmit={this.handleSubmit}
             onInfoChange={ this.onInfoChange }
             onSelectorChange={ this.onChoiceSelectorChange }>

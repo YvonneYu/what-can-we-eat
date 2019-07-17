@@ -96,6 +96,7 @@ export default (state = initialState, action) => {
       return {...state, restInfo: action.restInfo };
     case RESET_ALL_CHOICES:
       return {...deepCloneObj(initialState)};
+    // return a mapping state of edit rest obj
     case MAP_CHOICES_INPUTS:
       let rest = action.rest;
       let newRestInfo = {...deepCloneObj(initialState.restInfo)};
