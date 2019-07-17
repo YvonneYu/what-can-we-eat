@@ -46,10 +46,6 @@ let restaurantList = (state = initialState, action) => {
       return state.filter(res =>
         res.id !== action.id
       );
-    case actionTypes.FIND_REST:
-      return state.find( res =>
-        res.id === action.id
-      );
     case actionTypes.GET_REST_LIST:
       return state;
     case actionTypes.SAVE_REST_LIST:

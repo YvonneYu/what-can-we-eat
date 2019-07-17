@@ -33,10 +33,6 @@ export const mapChoicesInputsFromRest = (rest) => (
   { type: types.MAP_CHOICES_INPUTS, rest}
 );
 
-export const findRest = id => (
-  { type: types.FIND_REST, id }
-);
-
 export const saveRestList = list => (
   { type: types.SAVE_REST_LIST, list }
 );

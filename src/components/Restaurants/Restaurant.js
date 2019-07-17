@@ -10,7 +10,7 @@ const restaurant = (props) => {
           <p>名稱：{props.name} </p>
           <p>電話：{props.tel ? (<a href={'tel:' + props.tel}>{props.tel}</a>) : null}</p>
           <p>地址：{props.address} </p>
-          <p>類型：{ props.choices.join(', ')}</p>
+          <p>類型：{props.choices.join(', ')}</p>
         </div>
         <div className="grid-x align-center">
           <div className="small button-group cell small-5">
@@ -24,7 +24,12 @@ const restaurant = (props) => {
 };
 
 restaurant.propTypes = {
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  tel: PropTypes.string,
+  address: PropTypes.string,
+  choices: PropTypes.array,
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func
 };
 
 export default restaurant;
