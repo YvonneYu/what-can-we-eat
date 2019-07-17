@@ -29,6 +29,8 @@ class restaurantsBuilder extends Component {
                            onEdit={ handleEdit }>
                </Restaurant>;
       });
+    } else if (this.props.isLoading) {
+      resComponent = <p>Loading...</p>;
     } else {
       resComponent = <p>很抱歉，無搜尋結果...</p>;
     }
@@ -43,11 +45,13 @@ class restaurantsBuilder extends Component {
 }
 
 restaurantsBuilder.propsType = {
-  restList: PropTypes.array.isRequired
+  restList: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-    restList: state.restaurantList.restList
+    restList: state.restaurantList.restList,
+    isLoading: state.restaurantList.isLoading
   }
 );
 
