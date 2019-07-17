@@ -17,8 +17,12 @@ class restaurantsBuilder extends Component {
 
   render() {
     let resComponent = null;
-    let handleDelete = this.props.onDelete;
-    let handleEdit = this.props.onEdit;
+    let handleDelete = (id) => {
+      this.props.dispatch(deleteRest(id));
+    };
+    let handleEdit = (rest) => {
+      this.props.dispatch(mapChoicesInputsFromRest(rest));
+    };
 
     if (this.props.restList.length) {
       resComponent = this.props.restList.map(function (res) {
@@ -50,12 +54,6 @@ const mapStateToProps = state => ({
 );
 
 const mapDispatchToProps = (dispatch) => ({
-    onEdit: (rest) => {
-      dispatch(mapChoicesInputsFromRest(rest))
-    },
-    onDelete: (id) => {
-      dispatch(deleteRest(id))
-    },
     dispatch
 });
 

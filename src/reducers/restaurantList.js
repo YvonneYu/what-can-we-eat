@@ -1,28 +1,9 @@
 import * as actionTypes from '../constants/ActionTypes';
-import uuid from "uuid/v4";
 
 // use fake one now
 const initialState = {
   isLoading: false,
-  restList: [
-    {
-      id: uuid(),
-      name: '麥當勞',
-      tel: '',
-      choices: ['便宜', '速食', '垃圾食物', '全天', '有外帶']
-    },
-    {
-      id: uuid(),
-      name: 'test2 餐廳',
-      address: '測試的地址要很長測試的地址要很長',
-      choices: []
-    },
-    {
-      id: uuid(),
-      name: 'test333333333333 餐廳',
-      choices: []
-    }
-  ]
+  restList: []
 };
 
 const getSingleServiceRest = (rest) => {

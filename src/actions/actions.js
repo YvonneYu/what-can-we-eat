@@ -1,16 +1,29 @@
 import * as types from '../constants/ActionTypes';
 import uuid from 'uuid/v4';
+import { fetchRestListFromApi, saveRestListToApi } from "../api/restaurantStorage";
 
-
-const fetchRestList = () => {
+const fetchRestList = (callback) => {
   return dispatch => {
-    setTimeout(() => {
-      let json = localStorage.getItem('MY-REST-LIST');
-      let list = json && JSON.parse(json);
-      dispatch(setRestList(list === null ? []:list));
+    fetchRestListFromApi((list = []) => {
+      callback(list);
       dispatch(setLoading(false));
-    }, 1000);
+    });
   }
+};
+
+const saveRestList = (list, callback) => {
+  return dispatch => {
+    saveRestListToApi(list, () => {
+      callback();
+      dispatch(setLoading(false));
+    });
+  }
+};
+
+const getDispatchWithSaveRestList = (callback) => {
+  return (dispatch, getState) => {
+    return saveRestList(getState().restaurantList.restList, ()=> { callback(dispatch) });
+  };
 };
 
 /*
@@ -24,9 +37,9 @@ export const editRest = (id, rest) => (
   { type: types.EDIT_REST, rest: {...rest, id} }
 );
 
-export const deleteRest = id => (
-  { type: types.DELETE_REST, id }
-);
+export const deleteRest = id => {
+  return { type: types.DELETE_REST, id };
+};
 
 export const setChoices = choices => (
   { type: types.SET_CHOICES, choices }
@@ -48,13 +61,11 @@ export const setRestList = (list) => (
   { type: types.SET_REST_LIST, list }
 );
 
-export const saveRestList = list => (
-  { type: types.SAVE_REST_LIST, list }
-);
-
 export const getRestListIfNeed = () => {
-  return (dispatch, getState) => {
-    return dispatch(fetchRestList())
+  return (dispatch) => {
+    return dispatch(fetchRestList( (list) => {
+      dispatch(setRestList(list));
+    }))
   }
 };
 

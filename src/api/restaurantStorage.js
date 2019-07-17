@@ -1,20 +1,73 @@
+import uuid from "uuid/v4";
+
 /**
  * Get and Save restaurant list using localstorage
+ *
+ * isInitialized: boolean
+ * restInfo: array
+ *
  */
 
 // 模擬 call api
 const TIMEOUT = 1000;
-const STORE_ID = 'restaurants_list';
+const REST_STORE_ID = 'MY-REST-LIST';
+const INIT_STORE_ID = 'INIT_STORE_ID';
+// 先暫存在此 file 裡面避免一直呼叫
+let isSiteInitialized = false;
 
-export default {
-  geRestList: new Promise(function(resolve) {
-      setTimeout(() => {
-        let list = localStorage.getItem(STORE_ID);
-        resolve(list && JSON.parse(list));
-      }, TIMEOUT);
-    }),
-  saveRestList: (value, callback= () => {}) => {
-    localStorage.setItem(STORE_ID, JSON.stringify(value));
-    callback();
+const defaultRestInfo  = [
+  {
+    id: uuid(),
+    name: '麥當勞',
+    tel: '',
+    choices: ['便宜', '速食', '垃圾食物', '全天', '有外帶']
+  },
+  {
+    id: uuid(),
+    name: 'test2 餐廳',
+    address: '測試的地址要很長測試的地址要很長',
+    choices: []
+  },
+  {
+    id: uuid(),
+    name: 'test333333333333 餐廳',
+    choices: []
   }
-}
+];
+
+const getDataFromLocalStorage = (key) => {
+  let json = localStorage.getItem(key);
+  return json && JSON.parse(json);
+};
+
+const setDataToLocalStorage = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
+
+const isInitializedChecked = () => {
+  if (!isSiteInitialized) {
+      let isInitialized = getDataFromLocalStorage(INIT_STORE_ID);
+      if (!isInitialized) {
+        // set localstorage
+        setDataToLocalStorage(INIT_STORE_ID, true);
+        setDataToLocalStorage(REST_STORE_ID, defaultRestInfo);
+      }
+      isSiteInitialized = true;
+  }
+  return isSiteInitialized;
+};
+
+export const fetchRestListFromApi = (callback) => {
+  isInitializedChecked();
+  setTimeout(() => {
+    let data = getDataFromLocalStorage(REST_STORE_ID);
+    callback( Array.isArray(data) ? data : [] );
+  }, TIMEOUT)
+};
+
+export const saveRestListToApi = (list, callback) => {
+  setTimeout(() => {
+    setDataToLocalStorage(REST_STORE_ID, list);
+    callback();
+  }, TIMEOUT)
+};
