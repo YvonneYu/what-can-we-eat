@@ -30,7 +30,7 @@ class restaurantsBuilder extends Component {
 }
 
 const mapStateToProps = state => ({
-    restList: state.restaurantList
+    restList: state.restaurantList.restList
   }
 );
 
