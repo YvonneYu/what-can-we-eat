@@ -1,0 +1,28 @@
+$top-bar-bg-color: #0d98ba;
+$top-bar-color: #ffffff;
+
+.top-bar.my-top-bar {
+    margin-bottom: 20px;
+    padding-left: 20px;
+
+    background: $top-bar-bg-color;
+    color: #ffffff;
+    box-shadow: 0 0 15px #cccccc;
+
+    .top-bar-title {
+        color: $top-bar-color;
+    }
+
+    .menu {
+        background: $top-bar-bg-color;
+        li {
+            margin: 0 5px;
+            border-bottom: 1px solid $top-bar-color;
+
+            a {
+                padding: 0.5rem;
+                color: $top-bar-color;
+            }
+        }
+    }
+}
