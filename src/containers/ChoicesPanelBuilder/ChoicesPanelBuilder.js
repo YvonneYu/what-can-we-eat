@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import ChoosePanel from '../../components/ChoosePanel/ChoosePanel';
+import ChoicesPanel from '../../components/ChoicesPanel/ChoicesPanel';
 import * as actions from "../../actions/actions";
 import './ChoicesPanelBuilder.scss';
 
@@ -96,7 +96,7 @@ class choicesPanelBuilder extends Component {
   render() {
     return (
         <div className="main-selector-panel">
-          <ChoosePanel
+          <ChoicesPanel
             choices={ this.props.choices}
             restInfo={ this.props.restInfo }
             isEditMode={ this.props.isEditMode }
@@ -104,7 +104,7 @@ class choicesPanelBuilder extends Component {
             onSubmit={this.handleSubmit}
             onInfoChange={ this.handleInfoChange }
             onSelectorChange={ this.handleChoiceSelectorChange }>
-          </ChoosePanel>
+          </ChoicesPanel>
         </div>
       );
   }
