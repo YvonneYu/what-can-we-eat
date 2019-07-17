@@ -4,14 +4,12 @@ import { connect } from 'react-redux'
 import Restaurant from '../../components/Restaurants/Restaurant';
 import { deleteRest,
   mapChoicesInputsFromRest,
-  getRestListIfNeed,
-  setLoading
+  getRestListIfNeed
 } from '../../actions/actions';
 
 class restaurantsBuilder extends Component {
 
   componentDidMount() {
-    this.props.dispatch(setLoading(true));
     this.props.dispatch(getRestListIfNeed());
   }
 

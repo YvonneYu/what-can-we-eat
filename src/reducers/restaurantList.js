@@ -19,7 +19,7 @@ const getSingleServiceRest = (rest) => {
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_REST:
-    return {...state, restList: [...state, getSingleServiceRest(action.rest)]};
+      return {...state, restList: [...state.restList, getSingleServiceRest(action.rest)]};
     case actionTypes.EDIT_REST:
       return {...state, restList: state.restList.map((tempRest)=> {
         return (action.rest.id === tempRest.id ? getSingleServiceRest(action.rest) : tempRest);

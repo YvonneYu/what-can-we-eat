@@ -4,6 +4,7 @@ import { fetchRestListFromApi, saveRestListToApi } from "../api/restaurantStorag
 
 const fetchRestList = (callback) => {
   return dispatch => {
+    dispatch(setLoading(true));
     fetchRestListFromApi((list = []) => {
       callback(list);
       dispatch(setLoading(false));
@@ -11,34 +12,38 @@ const fetchRestList = (callback) => {
   }
 };
 
-const saveRestList = (list, callback) => {
+const saveRestList = (list, callback=()=>{}) => {
   return dispatch => {
+    dispatch(setLoading(true));
     saveRestListToApi(list, () => {
-      callback();
       dispatch(setLoading(false));
+      callback();
     });
   }
-};
-
-const getDispatchWithSaveRestList = (callback) => {
-  return (dispatch, getState) => {
-    return saveRestList(getState().restaurantList.restList, ()=> { callback(dispatch) });
-  };
 };
 
 /*
 * action creator
 * */
-export const addRest = rest => (
-  { type: types.ADD_REST, rest: {...rest, id: uuid()} }
-);
+export const addRest = rest => {
+  return (dispatch, getState ) => {
+    dispatch({ type: types.ADD_REST, rest: {...rest, id: uuid()} });
+    return dispatch(saveRestList(getState().restaurantList.restList));
+  };
+};
 
-export const editRest = (id, rest) => (
-  { type: types.EDIT_REST, rest: {...rest, id} }
-);
+export const editRest = (id, rest) => {
+  return (dispatch, getState ) => {
+    dispatch({ type: types.EDIT_REST, rest: {...rest, id} });
+    return dispatch(saveRestList(getState().restaurantList.restList));
+  };
+};
 
 export const deleteRest = id => {
-  return { type: types.DELETE_REST, id };
+  return (dispatch, getState ) => {
+      dispatch({ type: types.DELETE_REST, id });
+      return dispatch(saveRestList(getState().restaurantList.restList));
+  };
 };
 
 export const setChoices = choices => (

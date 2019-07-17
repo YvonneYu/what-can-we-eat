@@ -42,7 +42,7 @@ const getDataFromLocalStorage = (key) => {
   } catch (err) {
     console.error(err);
     alert('發生錯誤了！please reload the page!');
-    setDataToLocalStorage(INIT_STORE_ID, false);
+    setDataToLocalStorage(REST_STORE_ID, defaultRestInfo);
   }
   return '';
 };
