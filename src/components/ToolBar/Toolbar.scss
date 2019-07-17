@@ -12,7 +12,7 @@ $top-bar-color: #ffffff;
     .top-bar-title {
         color: $top-bar-color;
     }
-
+    
     .menu {
         background: $top-bar-bg-color;
         li {
@@ -22,6 +22,10 @@ $top-bar-color: #ffffff;
             a {
                 padding: 0.5rem;
                 color: $top-bar-color;
+                
+                &:active, &.active {
+                    color: #ffff00;
+                }
             }
         }
     }

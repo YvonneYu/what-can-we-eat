@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Toolbar.scss';
 
 const ToolBar = () => {
@@ -10,9 +10,9 @@ const ToolBar = () => {
       </div>
       <div className="top-bar-right">
         <ul className="menu">
-          <li><Link to="/">吃什麼？</Link></li>
-          <li><Link to="create-rest">新增餐廳</Link></li>
-          <li><Link to="edit-rest">編輯餐廳</Link></li>
+          <li><NavLink to="/" exact>吃什麼？</NavLink></li>
+          <li><NavLink to="/create-rest">新增餐廳</NavLink></li>
+          <li><NavLink to="/edit-rest">編輯餐廳</NavLink></li>
         </ul>
       </div>
     </div>
