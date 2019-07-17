@@ -36,8 +36,15 @@ const defaultRestInfo  = [
 ];
 
 const getDataFromLocalStorage = (key) => {
-  let json = localStorage.getItem(key);
-  return json && JSON.parse(json);
+  try {
+    let json = localStorage.getItem(key);
+    return json && JSON.parse(json);
+  } catch (err) {
+    console.error(err);
+    alert('發生錯誤了！please reload the page!');
+    setDataToLocalStorage(INIT_STORE_ID, false);
+  }
+  return '';
 };
 
 const setDataToLocalStorage = (key, value) => {
