@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import ChoosePanel from '../../components/ChoosePanel/ChoosePanel';
 import * as actions from "../../actions/actions";
-import './ChoosePanelBuilder.scss';
+import './ChoicesPanelBuilder.scss';
 
-class choosePanelBuilder extends Component {
+class choicesPanelBuilder extends Component {
 
   // 當選擇面板的按鈕被點擊
   handleChoiceSelectorChange = (targetType, targetIndex) => {
@@ -135,4 +135,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(choosePanelBuilder);
+export default connect(mapStateToProps, mapDispatchToProps)(choicesPanelBuilder);

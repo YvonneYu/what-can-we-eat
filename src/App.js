@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from './components/Layout/Layout.js';
 import RestaurantsBuilder from './containers/RestaurantsBuilder/RestaurantsBuilder';
-import ChoosePanelBuilder from './containers/ChoosePanelBuilder/ChoosePanelBuilder';
+import ChoicesPanelBuilder from './containers/ChoicesPanelBuilder/ChoicesPanelBuilder';
 import './App.scss';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div>
       <Layout>
         <RestaurantsBuilder></RestaurantsBuilder>
-        <ChoosePanelBuilder></ChoosePanelBuilder>
+        <ChoicesPanelBuilder></ChoicesPanelBuilder>
       </Layout>
     </div>
   );

@@ -1,9 +1,9 @@
 import React from 'react';
 import ChoiceSelectors from './ChoiceSelectors';
-import RestaurantInput from './RestaurantInput';
-import './ChoosePanel.scss';
+import ChoicesPanelRestInputs from './ChoicesPanelRestInputs';
+import './ChoicesPanel.scss';
 
-const choosePanel  = (props) => {
+const choicesPanel  = (props) => {
   let selectorsItems = props.choices.map((choice, index) => {
     return <ChoiceSelectors key={ index }
                             type={ choice.type }
@@ -20,9 +20,8 @@ const choosePanel  = (props) => {
             Object.keys(props.restInfo).map((key, index) => {
               let resInput = {...props.restInfo[key], id: key};
               return (
-                <RestaurantInput key={ index } {...resInput}
-                                 onChange={ props.onInfoChange }>
-                </RestaurantInput>)
+                <ChoicesPanelRestInputs key={ index } {...resInput} onChange={ props.onInfoChange }>
+                </ChoicesPanelRestInputs>)
             })
           }
       </div>
@@ -40,4 +39,4 @@ const choosePanel  = (props) => {
   )
 };
 
-export default choosePanel;
+export default choicesPanel;

@@ -1,7 +1,7 @@
 import React from 'react';
-import './ChoosePanel.scss';
+import './ChoicesPanel.scss';
 
-const restaurantInput = (props) => {
+const choicesPanelRestInputs = (props) => {
   let labelName = 'res_' + props.id;
   return (
     <div className="cell">
@@ -16,4 +16,4 @@ const restaurantInput = (props) => {
    )
 };
 
-export default restaurantInput;
+export default choicesPanelRestInputs;
