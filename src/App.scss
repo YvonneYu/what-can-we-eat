@@ -1,3 +1,43 @@
 // Foundation
 @import '~foundation-sites/scss/foundation';
 @include foundation-everything;
+
+$spinners-color: #ffffff;
+
+.is-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+// author: Harold Soto
+// https://codepen.io/bernethe/pen/dorozd
+.sp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    clear: both;
+}
+
+/* Spinner Circle Rotation */
+.sp-circle {
+    border: 4px rgba($spinners-color, 0.25) solid;
+    border-top: 4px rgba($spinners-color, 1) solid;
+    border-radius: 50%;
+    -webkit-animation: spCircRot .6s infinite linear;
+    animation: spCircRot .6s infinite linear;
+}
+@-webkit-keyframes spCircRot {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(359deg); }
+}
+@keyframes spCircRot {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(359deg); }
+}
