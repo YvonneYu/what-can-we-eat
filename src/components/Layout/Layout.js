@@ -15,7 +15,7 @@ const layout = ( props ) => {
           </ul>
         </div>
       </div>
-      <main className="my-main">
+      <main className="main">
         { props.children }
       </main>
     </React.Fragment>
