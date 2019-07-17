@@ -16,6 +16,13 @@ $selected-color: green;
     }
 }
 
+.submit-button {
+    margin: 1rem 0;
+    .button {
+        background-color: #0d98ba;
+    }
+}
+
 .form-error {
     // 因為 foundation default 把 form-error display: none (update by their js)
     // 我們顯示邏輯是自己寫的，所以直接把他 display. 再用 React 去操控是否顯示它
