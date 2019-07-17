@@ -49,8 +49,8 @@ export default (state = initialState, action) => {
         )};
     case actionTypes.GET_REST_LIST:
       return state;
-    case actionTypes.SAVE_REST_LIST:
-      return state;
+    case actionTypes.SET_REST_LIST:
+      return {...state, restList: action.list};
     case actionTypes.FILTER_REST_LIST:
       return {...state, restList: state.filter(res => {
           // if res choice is empty, default in the list
@@ -60,6 +60,8 @@ export default (state = initialState, action) => {
             return action.choices.has(choice);
           });
         })};
+    case actionTypes.SET_LOADING:
+        return {...state, isLoading: action.isLoading};
     default:
       return state;
   }

@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 import { connect } from 'react-redux'
-import { deleteRest, mapChoicesInputsFromRest } from '../../actions/actions';
 import Restaurant from '../../components/Restaurants/Restaurant';
+import { deleteRest,
+  mapChoicesInputsFromRest,
+  getRestListIfNeed,
+  setLoading
+} from '../../actions/actions';
 
 class restaurantsBuilder extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(setLoading(true));
+    this.props.dispatch(getRestListIfNeed());
+  }
+
   render() {
     let resComponent = null;
     let handleDelete = this.props.onDelete;
@@ -29,6 +40,10 @@ class restaurantsBuilder extends Component {
   }
 }
 
+restaurantsBuilder.propsType = {
+  restList: PropTypes.array.isRequired
+};
+
 const mapStateToProps = state => ({
     restList: state.restaurantList.restList
   }
@@ -40,7 +55,8 @@ const mapDispatchToProps = (dispatch) => ({
     },
     onDelete: (id) => {
       dispatch(deleteRest(id))
-    }
+    },
+    dispatch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(restaurantsBuilder);
