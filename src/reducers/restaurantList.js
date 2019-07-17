@@ -51,13 +51,12 @@ export default (state = initialState, action) => {
     case actionTypes.SAVE_REST_LIST:
       return state;
     case actionTypes.FILTER_REST_LIST:
-      let targetChoices = action.choices;
       return state.filter(res => {
         // if res choice is empty, default in the list
         if (res.choices.length === 0) return true;
         // return list if this res match one of choices
         res.choices.forEach( choice => {
-           return targetChoices.has(choice);
+           return action.choices.has(choice);
         });
       });
     default:
