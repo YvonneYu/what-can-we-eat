@@ -3,6 +3,7 @@ import { SET_CHOICES,
          SET_REST_INPUT_VALUES,
          MAP_CHOICES_INPUTS,
 } from '../constants/ActionTypes';
+import { deepCloneObj } from '../utils/utils';
 
 const getCheckedList = (list) => {
   return list.map((item) => {
@@ -75,8 +76,6 @@ const initialState = {
   id: '',
   isEditMode: false
 };
-
-const deepCloneObj = (obj) => JSON.parse(JSON.stringify(obj));
 
 const getMappingChoices = (targetChoices = []) => {
   let newChoices = [...deepCloneObj(initialState.choices)];
