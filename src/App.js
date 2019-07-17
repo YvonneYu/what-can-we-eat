@@ -12,7 +12,7 @@ function App(props) {
         <RestaurantsBuilder></RestaurantsBuilder>
         <ChoicesPanelBuilder></ChoicesPanelBuilder>
       </Layout>
-      <div className={ props.isLoading && 'is-loading'}>
+      <div className={ 'is-loading ' + (props.isLoading && 'is-visible') }>
         <div className="sp sp-circle"></div>
       </div>
     </div>
