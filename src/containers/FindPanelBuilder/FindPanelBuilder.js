@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ChoicesSectionBuilder from '../ChoicesPanelBuilder/ChoicesSectionBuilder';
 import '../ChoicesPanelBuilder/ChoicesPanelBuilder.scss';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import ChoicesSubmitInput from '../../components/ChoicesPanel/ChoicesSubmitInput';
 import * as actions from '../../actions/actions';
-import {choicesHelper} from "../../utils/utils";
+import { choicesHelper } from '../../utils/utils';
 import RestaurantsBuilder from '../RestaurantsBuilder/RestaurantsBuilder';
-import {getRestListIfNeed} from "../../actions/actions";
+import { getRestListIfNeed } from "../../actions/actions";
 
 class findPanelBuilder extends Component {
 
@@ -16,7 +16,8 @@ class findPanelBuilder extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.filterListByChoice(choicesHelper.getCheckedChoices(this.props.choices));
+    this.props.dispatch(actions.filterRestList(choicesHelper.getCheckedChoices(this.props.choices)));
+    this.props.dispatch(actions.resetChoices());
   };
 
   render() {
@@ -29,7 +30,7 @@ class findPanelBuilder extends Component {
               <RestaurantsBuilder />
             </div>
           </div>
-          <div>或是選擇中塞選：</div>
+          <div>或是在下面塞選相關：（無選擇=再隨機選三個）</div>
           <div className="main-selector-panel">
             <ChoicesSectionBuilder />
             <ChoicesSubmitInput />
@@ -45,9 +46,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  filterListByChoice: (choices) => {
-    dispatch(actions.filterRestList(choices))
-  },
   dispatch
 });
 

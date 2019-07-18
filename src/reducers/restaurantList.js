@@ -34,8 +34,6 @@ export default (state = initialState, action) => {
       return {...state, restList: action.list};
     case actionTypes.FILTER_REST_LIST:
       return {...state, restList: state.restList.filter(res => {
-          // if res choice is empty, default in the list
-          if (res.choices.length === 0) return true;
           // return list if this res match one of choices
           return res.choices.reduce( (hasMatch, choice) => {
             return hasMatch || action.choices.includes(choice);

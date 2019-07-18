@@ -22,22 +22,28 @@ const saveRestList = (list, callback=()=>{}) => {
   }
 };
 
-const dispatchAndFetchNewRestList = (actionType, callback=()=>{}) => {
+const dispatchAndFetchNewRestList = (actionType, isSaveInServer ,callback=()=>{}) => {
   return (dispatch, getState ) => {
     // fetch list before callback
     return dispatch(getRestListIfNeed( () => {
       dispatch(actionType);
-      dispatch(saveRestList(getState().restaurantList.restList));
+      if (isSaveInServer) {
+        dispatch(saveRestList(getState().restaurantList.restList));
+      }
       callback();
     }));
   };
+};
+
+const dispatchAndFetchNewRestListAndSave = (actionType, isSaveInServer ,callback) => {
+  return dispatchAndFetchNewRestList(actionType, true, callback);
 };
 
 /*
 * action creator
 * */
 export const addRest = (rest, history) => {
-  return dispatchAndFetchNewRestList(
+  return dispatchAndFetchNewRestListAndSave(
     { type: types.ADD_REST, rest: {...rest, id: uuid()} },
     () => {
       history.push('/');
@@ -45,7 +51,7 @@ export const addRest = (rest, history) => {
 };
 
 export const editRest = (id, rest, history) => {
-  return dispatchAndFetchNewRestList(
+  return dispatchAndFetchNewRestListAndSave(
     { type: types.EDIT_REST, rest: {...rest, id} },
     () => {
       history.push('/');
