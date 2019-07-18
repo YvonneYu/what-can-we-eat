@@ -1,7 +1,7 @@
 import React from 'react';
 import './ChoicesPanel.scss';
 
-const choicesPanelRestInputs = (props) => {
+const choicesPanelRestInput = (props) => {
   let labelName = 'res_' + props.id;
   return (
     <div className="cell">
@@ -16,4 +16,4 @@ const choicesPanelRestInputs = (props) => {
    )
 };
 
-export default choicesPanelRestInputs;
+export default choicesPanelRestInput;

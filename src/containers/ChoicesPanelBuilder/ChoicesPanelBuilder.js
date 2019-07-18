@@ -1,29 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import ChoicesPanel from '../../components/ChoicesPanel/ChoicesPanel';
+import ChoicesSectionBuilder from './ChoicesSectionBuilder';
+import RestInputs from '../../components/ChoicesPanel/RestInputs';
 import * as actions from "../../actions/actions";
+import { choicesHelper } from "../../utils/utils";
 import './ChoicesPanelBuilder.scss';
 
 class choicesPanelBuilder extends Component {
 
-  // 當選擇面板的按鈕被點擊
-  handleChoiceSelectorChange = (targetType, targetIndex) => {
-    const newChoices = this.props.choices.map((choice) => {
-        // find target choice by type
-        if ( choice.type === targetType ) {
-            // update data by targetIndex, if not target, return original value
-            let newChoiceData = choice.data.map( (value, i) => {
-                return targetIndex !== i ? value: {...value, checked: !value.checked};
-            });
-            return {...choice, data: newChoiceData};
-        }
-      // not target choice, return original one
-      return choice;
-    });
-    this.props.setChoices(newChoices);
-  };
-
-  // 當三個餐廳 Inputs 被點擊
   handleInfoChange = (event, inputKey) => {
     let newRestInfo = {...this.props.restInfo};
     let newValue = event.target.value;
@@ -47,22 +31,6 @@ class choicesPanelBuilder extends Component {
     return isValid;
   };
 
-  // get service like object for choices
-  getCheckedChoices = () => {
-    // get data structure like ['心情', '天氣熱']
-    return this.props.choices.reduce( (checkedList, choices) => {
-      let result = choices.data.filter((choice) => {
-        // find checked object
-        return choice.checked;
-      }).reduce((accList, obj) => {
-        // reduce to one single label
-        return [...accList, obj.label];
-      },[]);
-      // concat all for choices type
-      return [...checkedList, ...result];
-    }, []);
-  };
-
   // 檢查全部的 valid state, 如果有 Invalid 情形，return false
   isValidToSubmit = () => {
     return Object.keys(this.props.restInfo).reduce((isAllValid, key)=> {
@@ -80,7 +48,7 @@ class choicesPanelBuilder extends Component {
       name: this.props.restInfo.name.value,
       tel: this.props.restInfo.tel.value,
       address: this.props.restInfo.address.value,
-      choices: this.getCheckedChoices()
+      choices: choicesHelper.getCheckedChoices(this.props.choices)
     };
     if (this.props.isEditMode) {
       // pass id
@@ -96,15 +64,19 @@ class choicesPanelBuilder extends Component {
   render() {
     return (
         <div className="main-selector-panel">
-          <ChoicesPanel
-            choices={ this.props.choices}
-            restInfo={ this.props.restInfo }
-            isEditMode={ this.props.isEditMode }
-            isValidToSubmit={ this.isValidToSubmit() }
-            onSubmit={this.handleSubmit}
-            onInfoChange={ this.handleInfoChange }
-            onSelectorChange={ this.handleChoiceSelectorChange }>
-          </ChoicesPanel>
+          <form onSubmit={ (e) => this.handleSubmit(e) }>
+            <RestInputs restInfo={this.props.restInfo} onChange={ this.handleInfoChange } />
+            <ChoicesSectionBuilder />
+            <div>
+              <div className="grid-x grid-padding-x align-center submit-button">
+                <fieldset className="cell">
+                  <button className="button small expanded"
+                          type="submit" value="Submit"
+                          disabled={ !this.isValidToSubmit() }>送出</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
         </div>
       );
   }
@@ -123,9 +95,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleEditRest: (id, rest) => {
     dispatch(actions.editRest(id, rest))
-  },
-  setChoices: (choices) => {
-    dispatch(actions.setChoices(choices));
   },
   setRestInfo: (restInfo) => {
     dispatch(actions.setRestInputValues(restInfo));
