@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import ChoicesSectionBuilder from './ChoicesSectionBuilder';
 import RestInputs from '../../components/ChoicesPanel/RestInputs';
+import ChoicesSubmitInput from '../../components/ChoicesPanel/ChoicesSubmitInput';
 import * as actions from "../../actions/actions";
 import { choicesHelper } from "../../utils/utils";
 import './ChoicesPanelBuilder.scss';
@@ -75,16 +76,7 @@ class choicesPanelBuilder extends Component {
           <form onSubmit={ (e) => this.handleSubmit(e) }>
             <RestInputs restInfo={this.props.restInfo} onChange={ this.handleInfoChange } />
             <ChoicesSectionBuilder />
-            <div>
-              <div className="grid-x grid-padding-x align-center submit-button">
-                <fieldset className="cell">
-                  <button
-                    className="button small expanded"
-                    type="submit" value="Submit"
-                    disabled={ !this.isValidToSubmit() }>送出</button>
-                </fieldset>
-              </div>
-            </div>
+            <ChoicesSubmitInput disabled={ !this.isValidToSubmit() } />
           </form>
         </div>
       );
