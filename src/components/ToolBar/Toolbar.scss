@@ -1,5 +1,6 @@
 $top-bar-bg-color: #0d98ba;
 $top-bar-color: #ffffff;
+$link-active-color: #ffff00;
 
 .top-bar.my-top-bar {
     margin-bottom: 20px;
@@ -17,14 +18,15 @@ $top-bar-color: #ffffff;
         background: $top-bar-bg-color;
         li {
             margin: 0 5px;
-            border-bottom: 1px solid $top-bar-color;
 
             a {
+                border-bottom: 1px solid $top-bar-color;
                 padding: 0.5rem;
                 color: $top-bar-color;
                 
                 &:active, &.active {
-                    color: #ffff00;
+                    border-color: $link-active-color;
+                    color: $link-active-color;
                 }
             }
         }
