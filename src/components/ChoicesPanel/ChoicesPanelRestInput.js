@@ -6,7 +6,7 @@ const choicesPanelRestInput = (props) => {
   return (
     <div className="cell">
       <label htmlFor={ labelName }>{ props.label }
-        { props.isValid ? null : <span className="form-error">{ props.inputProps.errorMessage }</span> }
+        { props.isValid ? null : <span className="form-error show">{ props.inputProps.errorMessage }</span> }
       </label>
       <input type={ props.inputProps.type }
              name={ labelName } id={ labelName } value={ props.value }
