@@ -59,6 +59,7 @@ class choicesPanelBuilder extends Component {
     }
     //reset all panel choices deeply
     this.props.resetChoicesAndRestInfo();
+    this.props.history.push('/');
   };
 
   render() {
