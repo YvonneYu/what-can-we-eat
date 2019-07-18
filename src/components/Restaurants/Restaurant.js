@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import './Restaurant.scss';
 
 const restaurant = (props) => {
@@ -15,7 +16,7 @@ const restaurant = (props) => {
         <div className="grid-x align-center">
           <div className="small button-group cell small-5">
             <button className="button alert" onClick={ () => props.onDelete(props.id) }>刪除</button>
-            <button className="button" onClick={ () => props.onEdit(props) }>編輯</button>
+            <Link to={'/edit/' + props.id} className="button">編輯</Link>
           </div>
         </div>
       </div>

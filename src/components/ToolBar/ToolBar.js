@@ -12,6 +12,7 @@ const ToolBar = () => {
         <ul className="menu">
           <li><NavLink to="/" exact>吃什麼？</NavLink></li>
           <li><NavLink to="/create-rest">新增餐廳</NavLink></li>
+          <li><NavLink to="/show-all">餐廳列表</NavLink></li>
         </ul>
       </div>
     </div>

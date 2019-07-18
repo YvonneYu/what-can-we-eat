@@ -33,13 +33,13 @@ export default (state = initialState, action) => {
     case actionTypes.SET_REST_LIST:
       return {...state, restList: action.list};
     case actionTypes.FILTER_REST_LIST:
-      return {...state, restList: state.filter(res => {
+      return {...state, restList: state.restList.filter(res => {
           // if res choice is empty, default in the list
           if (res.choices.length === 0) return true;
           // return list if this res match one of choices
-          res.choices.forEach( choice => {
-            return action.choices.has(choice);
-          });
+          return res.choices.reduce( (hasMatch, choice) => {
+            return hasMatch || action.choices.includes(choice);
+          }, false);
         })};
     case actionTypes.SET_LOADING:
         return {...state, isLoading: action.isLoading};

@@ -22,29 +22,34 @@ const saveRestList = (list, callback=()=>{}) => {
   }
 };
 
-/*
-* action creator
-* */
-export const addRest = (rest, history) => {
+const dispatchAndFetchNewRestList = (actionType, callback=()=>{}) => {
   return (dispatch, getState ) => {
-    // fetch list before add
+    // fetch list before callback
     return dispatch(getRestListIfNeed( () => {
-      dispatch({ type: types.ADD_REST, rest: {...rest, id: uuid()} });
+      dispatch(actionType);
       dispatch(saveRestList(getState().restaurantList.restList));
-      history.push('/');
+      callback();
     }));
   };
 };
 
-export const editRest = (id, rest, history) => {
-  return (dispatch, getState ) => {
-    // fetch list before edit
-    return dispatch(getRestListIfNeed( () => {
-      dispatch({ type: types.EDIT_REST, rest: {...rest, id} });
-      dispatch(saveRestList(getState().restaurantList.restList));
+/*
+* action creator
+* */
+export const addRest = (rest, history) => {
+  return dispatchAndFetchNewRestList(
+    { type: types.ADD_REST, rest: {...rest, id: uuid()} },
+    () => {
       history.push('/');
-    }));
-  };
+    });
+};
+
+export const editRest = (id, rest, history) => {
+  return dispatchAndFetchNewRestList(
+    { type: types.EDIT_REST, rest: {...rest, id} },
+    () => {
+      history.push('/');
+    });
 };
 
 export const deleteRest = id => {
@@ -95,10 +100,9 @@ export const mapChoicesInputsFromRest = (rest) => (
   { type: types.MAP_CHOICES_INPUTS, rest}
 );
 
-export const filterRestList = (choices) => (
-  { type: types.FILTER_REST_LIST, choices }
-);
-
+export const filterRestList = (choices) => {
+  return dispatchAndFetchNewRestList({ type: types.FILTER_REST_LIST, choices });
+};
 
 export const setLoading = (isLoading) => (
   { type:types.SET_LOADING, isLoading }

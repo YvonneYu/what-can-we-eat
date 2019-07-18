@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux'
 import Restaurant from '../../components/Restaurants/Restaurant';
-import { deleteRest,
-  editRest,
-  getRestListIfNeed
-} from '../../actions/actions';
+import { deleteRest, getRestListIfNeed } from '../../actions/actions';
 
 class restaurantsBuilder extends Component {
 
@@ -18,15 +15,11 @@ class restaurantsBuilder extends Component {
     let handleDelete = (id) => {
       this.props.dispatch(deleteRest(id));
     };
-    let handleEdit = (rest) => {
-      this.props.history.push('/edit/' + rest.id);
-    };
 
     if (this.props.restList.length) {
       resComponent = this.props.restList.map(function (res) {
         return <Restaurant key={res.id} {...res}
-                           onDelete={ handleDelete }
-                           onEdit={ handleEdit }>
+                           onDelete={ handleDelete }>
                </Restaurant>;
       });
     } else if (this.props.isLoading) {
