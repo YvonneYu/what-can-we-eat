@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes';
 import uuid from 'uuid/v4';
 import { fetchRestListFromApi, saveRestListToApi } from "../api/restaurantStorage";
 
-const fetchRestList = (callback) => {
+const fetchRestList = (callback=()=>{}) => {
   return dispatch => {
     dispatch(setLoading(true));
     fetchRestListFromApi((list = []) => {
@@ -28,6 +28,7 @@ const saveRestList = (list, callback=()=>{}) => {
 export const addRest = rest => {
   return (dispatch, getState ) => {
     dispatch({ type: types.ADD_REST, rest: {...rest, id: uuid()} });
+    dispatch(fetchRestList());
     return dispatch(saveRestList(getState().restaurantList.restList));
   };
 };
