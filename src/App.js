@@ -13,6 +13,7 @@ function App(props) {
         <Layout>
           <Route path="/" exact component={ RestaurantsBuilder }></Route>
           <Route path="/create-rest" exact component={ ChoicesPanelBuilder }></Route>
+          <Route path="/edit/:id" exact component={ ChoicesPanelBuilder }></Route>
         </Layout>
       </div>
       <div className={ 'is-loading ' + (props.isLoading && 'is-visible') }>

@@ -25,18 +25,25 @@ const saveRestList = (list, callback=()=>{}) => {
 /*
 * action creator
 * */
-export const addRest = rest => {
+export const addRest = (rest, history) => {
   return (dispatch, getState ) => {
-    dispatch({ type: types.ADD_REST, rest: {...rest, id: uuid()} });
-    dispatch(fetchRestList());
-    return dispatch(saveRestList(getState().restaurantList.restList));
+    // fetch list before add
+    return dispatch(getRestListIfNeed( () => {
+      dispatch({ type: types.ADD_REST, rest: {...rest, id: uuid()} });
+      dispatch(saveRestList(getState().restaurantList.restList));
+      history.push('/');
+    }));
   };
 };
 
-export const editRest = (id, rest) => {
+export const editRest = (id, rest, history) => {
   return (dispatch, getState ) => {
-    dispatch({ type: types.EDIT_REST, rest: {...rest, id} });
-    return dispatch(saveRestList(getState().restaurantList.restList));
+    // fetch list before edit
+    return dispatch(getRestListIfNeed( () => {
+      dispatch({ type: types.EDIT_REST, rest: {...rest, id} });
+      dispatch(saveRestList(getState().restaurantList.restList));
+      history.push('/');
+    }));
   };
 };
 
@@ -59,21 +66,34 @@ export const resetChoices = () => (
   { type: types.RESET_ALL_CHOICES}
 );
 
-export const mapChoicesInputsFromRest = (rest) => (
-  { type: types.MAP_CHOICES_INPUTS, rest}
-);
 
 export const setRestList = (list) => (
   { type: types.SET_REST_LIST, list }
 );
 
-export const getRestListIfNeed = () => {
+export const getRestListIfNeed = (callback=()=>{}) => {
   return (dispatch) => {
     return dispatch(fetchRestList( (list) => {
       dispatch(setRestList(list));
+      callback();
     }))
   }
 };
+
+export const findRestInServer = (id) => {
+  return (dispatch) => {
+    return dispatch(fetchRestList( (list) => {
+      let rest = list.find((temp) => {
+        return temp.id === id;
+      });
+      dispatch(mapChoicesInputsFromRest(rest));
+    }))
+  }
+};
+
+export const mapChoicesInputsFromRest = (rest) => (
+  { type: types.MAP_CHOICES_INPUTS, rest}
+);
 
 export const filterRestList = (choices) => (
   { type: types.FILTER_REST_LIST, choices }

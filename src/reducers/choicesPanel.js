@@ -73,9 +73,7 @@ const initialState = {
         isRequired: false,
         showInCreationMode: false
     }
-  },
-  id: '',
-  isEditMode: false
+  }
 };
 
 /***
@@ -116,10 +114,8 @@ export default (state = initialState, action) => {
     // return a mapping state of edit rest obj
     case MAP_CHOICES_INPUTS:
       return {
-        id: action.rest.id,
         restInfo: getMappingRestInfo(action.rest),
-        choices: getMappingChoices(action.rest.choices),
-        isEditMode: true
+        choices: getMappingChoices(action.rest.choices)
       };
     default:
       return state;

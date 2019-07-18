@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from 'react-redux'
 import Restaurant from '../../components/Restaurants/Restaurant';
 import { deleteRest,
-  mapChoicesInputsFromRest,
+  editRest,
   getRestListIfNeed
 } from '../../actions/actions';
 
@@ -19,7 +19,7 @@ class restaurantsBuilder extends Component {
       this.props.dispatch(deleteRest(id));
     };
     let handleEdit = (rest) => {
-      this.props.dispatch(mapChoicesInputsFromRest(rest));
+      this.props.history.push('/edit/' + rest.id);
     };
 
     if (this.props.restList.length) {

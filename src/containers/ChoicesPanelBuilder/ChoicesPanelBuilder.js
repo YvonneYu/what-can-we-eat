@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 import ChoicesSectionBuilder from './ChoicesSectionBuilder';
 import RestInputs from '../../components/ChoicesPanel/RestInputs';
 import * as actions from "../../actions/actions";
@@ -7,6 +7,13 @@ import { choicesHelper } from "../../utils/utils";
 import './ChoicesPanelBuilder.scss';
 
 class choicesPanelBuilder extends Component {
+
+  componentWillMount() {
+    // if edit, get rest from server first
+    if (this.props.match.params.id) {
+      this.props.dispatch(actions.findRestInServer(this.props.match.params.id));
+    }
+  }
 
   handleInfoChange = (event, inputKey) => {
     let newRestInfo = {...this.props.restInfo};
@@ -50,16 +57,16 @@ class choicesPanelBuilder extends Component {
       address: this.props.restInfo.address.value,
       choices: choicesHelper.getCheckedChoices(this.props.choices)
     };
-    if (this.props.isEditMode) {
+    // edit mode
+    if (this.props.match.params.id) {
       // pass id
-      this.props.handleEditRest(this.props.restId, newRest);
+      this.props.handleEditRest(this.props.match.params.id, newRest, this.props.history);
     } else {
       // in creation mode
-      this.props.handleCreateRest(newRest);
+      this.props.handleCreateRest(newRest, this.props.history);
     }
     //reset all panel choices deeply
     this.props.resetChoicesAndRestInfo();
-    this.props.history.push('/');
   };
 
   render() {
@@ -71,9 +78,10 @@ class choicesPanelBuilder extends Component {
             <div>
               <div className="grid-x grid-padding-x align-center submit-button">
                 <fieldset className="cell">
-                  <button className="button small expanded"
-                          type="submit" value="Submit"
-                          disabled={ !this.isValidToSubmit() }>送出</button>
+                  <button
+                    className="button small expanded"
+                    type="submit" value="Submit"
+                    disabled={ !this.isValidToSubmit() }>送出</button>
                 </fieldset>
               </div>
             </div>
@@ -85,24 +93,24 @@ class choicesPanelBuilder extends Component {
 
 const mapStateToProps = state => ({
   choices: state.choicesPanel.choices,
-  restInfo: state.choicesPanel.restInfo,
-  isEditMode: state.choicesPanel.isEditMode,
-  restId: state.choicesPanel.id
+  restInfo: state.choicesPanel.restInfo
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleCreateRest: (rest) => {
-    dispatch(actions.addRest(rest))
+  // pass router history make sure change page after all async call
+  handleCreateRest: (rest, history) => {
+    dispatch(actions.addRest(rest, history))
   },
-  handleEditRest: (id, rest) => {
-    dispatch(actions.editRest(id, rest))
+  handleEditRest: (id, rest, history) => {
+    dispatch(actions.editRest(id, rest, history))
   },
   setRestInfo: (restInfo) => {
     dispatch(actions.setRestInputValues(restInfo));
   },
   resetChoicesAndRestInfo: () => {
     dispatch(actions.resetChoices())
-  }
+  },
+  dispatch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(choicesPanelBuilder);
