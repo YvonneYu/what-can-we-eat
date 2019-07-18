@@ -30,7 +30,7 @@ class findPanelBuilder extends Component {
               <RestaurantsBuilder displayNum={3} />
             </div>
           </div>
-          <div>或是在下面塞選相關：（無選擇=再隨機選三個）</div>
+          <div>或是在下面篩選：</div>
           <div className="main-selector-panel">
             <ChoicesSectionBuilder />
             <ChoicesSubmitInput />
