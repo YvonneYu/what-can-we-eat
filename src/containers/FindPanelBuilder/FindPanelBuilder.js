@@ -10,6 +10,11 @@ import { getRestListIfNeed } from "../../actions/actions";
 
 class findPanelBuilder extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {isSelectRest: false};
+  }
+
   componentWillMount() {
     this.props.dispatch(getRestListIfNeed());
   }
@@ -18,6 +23,9 @@ class findPanelBuilder extends Component {
     e.preventDefault();
     this.props.dispatch(actions.filterRestList(choicesHelper.getCheckedChoices(this.props.choices)));
     this.props.dispatch(actions.resetChoices());
+    // scroll to top
+    window.scrollTo(0, 0);
+    this.setState({isSelectRest: true})
   };
 
   render() {
@@ -25,7 +33,7 @@ class findPanelBuilder extends Component {
       <div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <div>
-            隨便挑三個給你：
+            <span>{ this.state.isSelectRest ? '篩選結果':'隨便挑三個給你'}：</span>
             <div>
               <RestaurantsBuilder displayNum={3} />
             </div>
