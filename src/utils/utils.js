@@ -6,6 +6,21 @@
 
 export const deepCloneObj = (obj) => JSON.parse(JSON.stringify(obj));
 
+export const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
+
+export const getRandomIntList = (len = 3, maxNum) => {
+  let list = [];
+  for (let i = 0; i < len;) {
+    let temp = getRandomInt(maxNum);
+    // 避免遇到重複的 randomInt
+    if (!list.includes(temp)) {
+      list.push(temp);
+      i++
+    }
+  }
+  console.log('list', list);
+  return list;
+};
 
 export const choicesHelper = {
   // get service like object for choices

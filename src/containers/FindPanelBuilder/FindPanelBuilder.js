@@ -25,9 +25,9 @@ class findPanelBuilder extends Component {
       <div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <div>
-            隨便選三個：
+            隨便挑三個給你：
             <div>
-              <RestaurantsBuilder />
+              <RestaurantsBuilder displayNum={3} />
             </div>
           </div>
           <div>或是在下面塞選相關：（無選擇=再隨機選三個）</div>
