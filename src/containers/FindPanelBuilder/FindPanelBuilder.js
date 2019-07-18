@@ -4,7 +4,7 @@ import '../ChoicesPanelBuilder/ChoicesPanelBuilder.scss';
 import { connect } from 'react-redux';
 import ChoicesSubmitInput from '../../components/ChoicesPanel/ChoicesSubmitInput';
 import * as actions from '../../actions/actions';
-import { choicesHelper } from '../../utils/utils';
+import {choicesHelper, getRandomIntList} from '../../utils/utils';
 import RestaurantsBuilder from '../RestaurantsBuilder/RestaurantsBuilder';
 import { getRestListIfNeed } from "../../actions/actions";
 
@@ -12,7 +12,7 @@ class findPanelBuilder extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {isSelectRest: false};
+    this.state = {isSelectRest: false, restId: Math.random()};
   }
 
   componentWillMount() {
@@ -21,11 +21,17 @@ class findPanelBuilder extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.dispatch(actions.filterRestList(choicesHelper.getCheckedChoices(this.props.choices)));
-    this.props.dispatch(actions.resetChoices());
+    let choices = choicesHelper.getCheckedChoices(this.props.choices);
+    if (choices.length !== 0) {
+      this.props.dispatch(actions.filterRestList(choices));
+      this.props.dispatch(actions.resetChoices());
+      this.setState({isSelectRest: true});
+    } else {
+      // force rerender 髒髒！
+      this.setState({isSelectRest: false, restId: Math.random()});
+    }
     // scroll to top
     window.scrollTo(0, 0);
-    this.setState({isSelectRest: true})
   };
 
   render() {
@@ -35,10 +41,10 @@ class findPanelBuilder extends Component {
           <div>
             <span>{ this.state.isSelectRest ? '篩選結果':'隨便挑三個給你'}：</span>
             <div>
-              <RestaurantsBuilder displayNum={3} />
+              <RestaurantsBuilder displayNum={3} id={this.state.restId}/>
             </div>
           </div>
-          <div>或是在下面篩選：</div>
+          <div>或是在下面篩選：（無篩選=隨機再選擇）</div>
           <div className="main-selector-panel">
             <ChoicesSectionBuilder />
             <ChoicesSubmitInput />
@@ -50,6 +56,7 @@ class findPanelBuilder extends Component {
 }
 
 const mapStateToProps = state => ({
+  restList: state.restaurantList.restList,
   choices: state.choicesPanel.choices
 });
 
