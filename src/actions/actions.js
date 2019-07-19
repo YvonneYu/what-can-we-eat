@@ -35,7 +35,7 @@ const dispatchAndFetchNewRestList = (actionType, isSaveInServer ,callback=()=>{}
   };
 };
 
-const dispatchAndFetchNewRestListAndSave = (actionType, isSaveInServer ,callback) => {
+const dispatchAndFetchNewRestListAndSave = (actionType ,callback) => {
   return dispatchAndFetchNewRestList(actionType, true, callback);
 };
 
