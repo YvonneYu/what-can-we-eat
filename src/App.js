@@ -9,7 +9,7 @@ import './App.scss';
 
 function App(props) {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div>
         <Layout>
           <Route path="/" exact component={ FindPanelBuilder }></Route>
