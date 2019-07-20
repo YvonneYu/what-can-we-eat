@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ad04c9978ea5b4a680bb916066249e37",
+    "revision": "1e8757e9eb012b227763d2f507947f31",
     "url": "/what-can-we-eat/index.html"
   },
   {
-    "revision": "701918101803de7a30e2",
+    "revision": "c53ffa363f4e00c27c8a",
     "url": "/what-can-we-eat/static/css/main.d4d5d729.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/what-can-we-eat/static/js/2.e7bccf47.chunk.js"
   },
   {
-    "revision": "701918101803de7a30e2",
-    "url": "/what-can-we-eat/static/js/main.15175531.chunk.js"
+    "revision": "c53ffa363f4e00c27c8a",
+    "url": "/what-can-we-eat/static/js/main.e8875211.chunk.js"
   },
   {
     "revision": "0d5bec681ce91d3e2a53",
