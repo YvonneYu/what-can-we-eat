@@ -5,7 +5,7 @@ import './Layout.scss';
 const layout = ( props ) => {
   return (
     <React.Fragment>
-      <Toolbar></Toolbar>
+      <Toolbar />
       <main className="main">
         { props.children }
       </main>
