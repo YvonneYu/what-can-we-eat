@@ -58,7 +58,7 @@ class findPanelBuilder extends Component {
             <div>
               {
                 this.state.selectedList.length ?
-                  <Restaurants restList={ this.state.selectedList } handleRestDelete={ this.props.handleRestDelete } />
+                  <Restaurants restList={ this.state.selectedList } hideEditBtns={ true } />
                   : <p> { this.state.isSelectRest ? "不好意思，無篩選結果喔！" : "看來沒有任何餐廳耶，快去新增吧！" }</p>
               }
             </div>

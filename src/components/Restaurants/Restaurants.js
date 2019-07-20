@@ -8,7 +8,7 @@ const restaurants = (props) => {
     <div className="grid-container">
       <div className="grid-x grid-padding-x small-up-1 medium-up-2 large-up-3">
         {props.restList.map(function (res) {
-          return <Restaurant key={res.id} {...res}
+          return <Restaurant key={res.id} {...res} hideEditBtns={ props.hideEditBtns }
                              onDelete={props.handleRestDelete}>
           </Restaurant>;
         })}
@@ -19,7 +19,8 @@ const restaurants = (props) => {
 
 restaurants.propTypes = {
   restList: PropTypes.array,
-  handleRestDelete: PropTypes.func
+  handleRestDelete: PropTypes.func,
+  hideEditBtns: PropTypes.bool
 };
 
 export default restaurants;

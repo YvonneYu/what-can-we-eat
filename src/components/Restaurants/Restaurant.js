@@ -13,12 +13,15 @@ const restaurant = (props) => {
           <p>地址：{ props.address } </p>
           <p>類型：{ props.choices.join(', ') }</p>
         </div>
-        <div className="grid-x align-center">
-          <div className="small button-group cell small-5">
-            <button className="button alert" onClick={ () => props.onDelete(props.id) }>刪除</button>
-            <Link to={'/edit/' + props.id} className="button">編輯</Link>
-          </div>
-        </div>
+        {
+          props.hideEditBtns ? null :
+            <div className="grid-x align-center">
+              <div className="small button-group cell small-5">
+                <button className="button alert" onClick={ () => props.onDelete(props.id) }>刪除</button>
+                <Link to={'/edit/' + props.id} className="button">編輯</Link>
+              </div>
+            </div>
+        }
       </div>
     </div>
   )
