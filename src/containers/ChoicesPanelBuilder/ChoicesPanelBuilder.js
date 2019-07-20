@@ -86,12 +86,12 @@ class choicesPanelBuilder extends Component {
 
 choicesPanelBuilder.propTypes = {
   choices: PropTypes.array,
-  restInfo: PropTypes.array
+  restInfo: PropTypes.object
 };
 
 choicesPanelBuilder.defaultProps = {
   choices: [],
-  restInfo: []
+  restInfo: {}
 };
 
 const mapStateToProps = state => ({

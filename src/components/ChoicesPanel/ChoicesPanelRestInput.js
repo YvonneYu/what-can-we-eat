@@ -23,22 +23,22 @@ choicesPanelRestInput.propTypes = {
   value: PropTypes.string,
   isValid: PropTypes.bool,
   onChange: PropTypes.func,
-  inputProps: {
-    type: PropTypes.string,
-    placeholder: PropTypes.string,
-    errorMessage: PropTypes.string
-  }
+  inputProps: PropTypes.shape ({
+      type: PropTypes.string,
+      placeholder: PropTypes.string,
+      errorMessage: PropTypes.string
+  })
 };
 
 choicesPanelRestInput.defaultProps = {
   value: '',
   isValid: true,
   onChange: () => {},
-  inputProps: {
+  inputProps: PropTypes.shape ({
     type: '',
     placeholder: '',
     errorMessage: ''
-  }
+  })
 };
 
 export default choicesPanelRestInput;

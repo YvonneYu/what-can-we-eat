@@ -23,7 +23,7 @@ restaurants.propTypes = {
   hideEditBtns: PropTypes.bool
 };
 
-restaurants.propTypes = {
+restaurants.defaultProps = {
   restList: [],
   handleRestDelete: () => {},
   hideEditBtns: false
