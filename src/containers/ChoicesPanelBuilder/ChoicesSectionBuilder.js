@@ -6,8 +6,13 @@ import * as actions from "../../actions/actions";
 
 class choicesSectionBuilder extends Component {
 
-  // 當選擇面板的按鈕被點擊
-  handleChoiceSelectorChange = (targetType, targetIndex) => {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+    // 當選擇面板的按鈕被點擊
+  handleChange(targetType, targetIndex) {
     const newChoices = this.props.choices.map((choice) => {
       // find target choice by type
       if ( choice.type === targetType ) {
@@ -31,7 +36,7 @@ class choicesSectionBuilder extends Component {
             return <ChoiceSelectors key={ index }
                                     type={ choice.type }
                                     list={ choice.data }
-                                    onChange={ this.handleChoiceSelectorChange }
+                                    onChange={ this.handleChange }
                                     label={ choice.label }>
             </ChoiceSelectors>;
           })

@@ -15,6 +15,8 @@ class findPanelBuilder extends Component {
   constructor(props) {
     super(props);
     this.state = {isSelectRest: false, selectedList: []};
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -36,7 +38,7 @@ class findPanelBuilder extends Component {
     })
   }
 
-  handleSubmit = (e) => {
+  handleSubmit(e) {
     e.preventDefault();
     let choices = choicesHelper.getCheckedChoices(this.props.choices);
     if (choices.length !== 0) {

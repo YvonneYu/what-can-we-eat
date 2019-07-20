@@ -10,6 +10,14 @@ import './ChoicesPanelBuilder.scss';
 
 class choicesPanelBuilder extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.handleInfoChange = this.handleInfoChange.bind(this);
+    this.isValidToSubmit = this.isValidToSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentWillMount() {
     // if edit, get rest from server first
     if (this.props.match.params.id) {
@@ -17,7 +25,7 @@ class choicesPanelBuilder extends Component {
     }
   }
 
-  handleInfoChange = (event, inputKey) => {
+  handleInfoChange(event, inputKey) {
     let newRestInfo = {...this.props.restInfo};
     let newValue = event.target.value;
     let isValid = this.validateInput(newValue, newRestInfo[inputKey]);
@@ -41,13 +49,13 @@ class choicesPanelBuilder extends Component {
   };
 
   // 檢查全部的 valid state, 如果有 Invalid 情形，return false
-  isValidToSubmit = () => {
+  isValidToSubmit() {
     return Object.keys(this.props.restInfo).reduce((isAllValid, key)=> {
       return this.props.restInfo[key].isValid && isAllValid;
     }, true);
   };
 
-  handleSubmit = (e) => {
+  handleSubmit(e) {
     e.preventDefault();
     if (!this.isValidToSubmit()) {
       alert('資料有誤！不能新增！');
