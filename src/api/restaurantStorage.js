@@ -24,14 +24,16 @@ const defaultRestInfo  = [
   },
   {
     id: uuid(),
-    name: 'test2 餐廳',
-    address: '測試的地址要很長測試的地址要很長',
-    choices: []
+    name: '便利商店',
+    address: '',
+    choices: ['便宜', '全天', '方便']
   },
   {
     id: uuid(),
-    name: 'test333333333333 餐廳',
-    choices: []
+    name: 'Default 餐廳',
+    tel: '021234567',
+    address:'Default 地址',
+    choices: ['異國料理']
   }
 ];
 

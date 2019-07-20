@@ -34,7 +34,7 @@ const initialState = {
     {
       type: 'RES_MODE',
       label: '心情',
-      data: getCheckedList(['有湯', '無湯', '天氣熱想吃', '天氣冷想吃', '有服務費', '無服務費', '聚餐', '有酒', '有外帶'])
+      data: getCheckedList(['有湯', '無湯', '天氣熱想吃', '天氣冷想吃', '方便', '有服務費', '無服務費', '聚餐', '有酒', '有外帶'])
     }
   ],
   restInfo: {
