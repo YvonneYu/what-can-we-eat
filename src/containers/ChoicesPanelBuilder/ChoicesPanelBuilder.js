@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import ChoicesSectionBuilder from './ChoicesSectionBuilder';
 import RestInputs from '../../components/ChoicesPanel/RestInputs';
 import ChoicesSubmitInput from '../../components/ChoicesPanel/ChoicesSubmitInput';
@@ -82,6 +83,11 @@ class choicesPanelBuilder extends Component {
       );
   }
 }
+
+choicesPanelBuilder.propTypes = {
+  choices: PropTypes.array,
+  restInfo: PropTypes.array
+};
 
 const mapStateToProps = state => ({
   choices: state.choicesPanel.choices,

@@ -28,9 +28,7 @@ class restaurantsBuilder extends Component {
 
 restaurantsBuilder.propsType = {
   restList: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool,
-  // display the given number of list
-  displayNum: PropTypes.number
+  isLoading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

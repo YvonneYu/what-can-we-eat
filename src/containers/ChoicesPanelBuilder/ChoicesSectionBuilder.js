@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import ChoiceSelectors from "../../components/ChoicesPanel/ChoiceSelectors";
-import {connect} from "react-redux";
+import ChoiceSelectors from '../../components/ChoicesPanel/ChoiceSelectors';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import * as actions from "../../actions/actions";
 
 class choicesSectionBuilder extends Component {
@@ -39,6 +40,10 @@ class choicesSectionBuilder extends Component {
     )
   }
 }
+
+choicesSectionBuilder.propTypes = {
+  choices: PropTypes.array
+};
 
 const mapStateToProps = state => ({
   choices: state.choicesPanel.choices

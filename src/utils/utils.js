@@ -18,7 +18,6 @@ export const getRandomIntList = (len = 3, maxNum) => {
       i++
     }
   }
-  console.log('list', list);
   return list;
 };
 

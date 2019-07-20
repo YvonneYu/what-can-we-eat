@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import ChoicesSectionBuilder from '../ChoicesPanelBuilder/ChoicesSectionBuilder';
-import '../ChoicesPanelBuilder/ChoicesPanelBuilder.scss';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ChoicesSubmitInput from '../../components/ChoicesPanel/ChoicesSubmitInput';
-import * as actions from '../../actions/actions';
-import {choicesHelper, getRandomIntList} from '../../utils/utils';
 import Restaurants from '../../components/Restaurants/Restaurants';
+import * as actions from '../../actions/actions';
+import { choicesHelper, getRandomIntList } from '../../utils/utils';
 import { getRestListIfNeed } from '../../actions/actions';
 import { deleteRest } from '../../actions/actions';
+import '../ChoicesPanelBuilder/ChoicesPanelBuilder.scss';
 
 class findPanelBuilder extends Component {
 
@@ -73,6 +74,11 @@ class findPanelBuilder extends Component {
     )
   };
 }
+
+findPanelBuilder.propTypes = {
+  restList: PropTypes.array,
+  choices: PropTypes.array
+};
 
 const mapStateToProps = state => ({
   restList: state.restaurantList.restList,

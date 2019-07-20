@@ -1,5 +1,6 @@
 import React from 'react';
-import ChoicesPanelRestInput from "./ChoicesPanelRestInput";
+import PropTypes from 'prop-types';
+import ChoicesPanelRestInput from './ChoicesPanelRestInput';
 
 const restInputs = (props) => {
   return (
@@ -16,6 +17,11 @@ const restInputs = (props) => {
       }
     </div>
   )
+};
+
+restInputs.propTypes = {
+  restInfo: PropTypes.object,
+  onChange: PropTypes.func
 };
 
 export default restInputs;

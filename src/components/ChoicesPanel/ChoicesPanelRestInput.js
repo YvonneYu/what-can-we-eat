@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ChoicesPanel.scss';
 
 const choicesPanelRestInput = (props) => {
@@ -14,6 +15,19 @@ const choicesPanelRestInput = (props) => {
              placeholder={props.inputProps.placeholder} />
     </div>
    )
+};
+
+choicesPanelRestInput.propTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  isValid: PropTypes.bool,
+  onChange: PropTypes.func,
+  inputProps: {
+    type: PropTypes.string,
+    placeholder: PropTypes.string,
+    errorMessage: PropTypes.string
+  }
 };
 
 export default choicesPanelRestInput;
