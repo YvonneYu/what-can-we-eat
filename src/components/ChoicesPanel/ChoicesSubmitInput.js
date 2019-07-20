@@ -20,4 +20,9 @@ choicesSubmitInput.propTypes = {
   disabled: PropTypes.bool
 };
 
+choicesSubmitInput.defaultProps = {
+  onClick: () => {},
+  disabled: false
+};
+
 export default choicesSubmitInput;

@@ -24,4 +24,9 @@ restInputs.propTypes = {
   onChange: PropTypes.func
 };
 
+restInputs.defaultProps = {
+  restInputs: {},
+  onChange: () => {}
+};
+
 export default restInputs;

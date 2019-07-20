@@ -89,6 +89,11 @@ choicesPanelBuilder.propTypes = {
   restInfo: PropTypes.array
 };
 
+choicesPanelBuilder.defaultProps = {
+  choices: [],
+  restInfo: []
+};
+
 const mapStateToProps = state => ({
   choices: state.choicesPanel.choices,
   restInfo: state.choicesPanel.restInfo

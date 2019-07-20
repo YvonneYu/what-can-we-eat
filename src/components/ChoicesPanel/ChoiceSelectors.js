@@ -33,4 +33,11 @@ ChoiceSelectors.propTypes = {
   onChange: PropTypes.func
 };
 
+ChoiceSelectors.defaultProps = {
+  type: '',
+  list: [],
+  label: '',
+  onChange: () => {}
+};
+
 export default ChoiceSelectors;

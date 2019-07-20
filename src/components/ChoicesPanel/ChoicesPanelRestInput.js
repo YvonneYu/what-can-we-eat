@@ -30,4 +30,15 @@ choicesPanelRestInput.propTypes = {
   }
 };
 
+choicesPanelRestInput.defaultProps = {
+  value: '',
+  isValid: true,
+  onChange: () => {},
+  inputProps: {
+    type: '',
+    placeholder: '',
+    errorMessage: ''
+  }
+};
+
 export default choicesPanelRestInput;

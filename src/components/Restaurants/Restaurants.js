@@ -23,4 +23,10 @@ restaurants.propTypes = {
   hideEditBtns: PropTypes.bool
 };
 
+restaurants.propTypes = {
+  restList: [],
+  handleRestDelete: () => {},
+  hideEditBtns: false
+};
+
 export default restaurants;

@@ -80,6 +80,11 @@ findPanelBuilder.propTypes = {
   choices: PropTypes.array
 };
 
+findPanelBuilder.defaultProps = {
+  restList: [],
+  choices: []
+};
+
 const mapStateToProps = state => ({
   restList: state.restaurantList.restList,
   choices: state.choicesPanel.choices

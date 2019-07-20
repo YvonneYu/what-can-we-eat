@@ -32,8 +32,14 @@ restaurant.propTypes = {
   tel: PropTypes.string,
   address: PropTypes.string,
   choices: PropTypes.array,
-  onDelete: PropTypes.func,
-  onEdit: PropTypes.func
+  onDelete: PropTypes.func
+};
+
+restaurant.defaultProps = {
+  tel: '',
+  address: '',
+  choices: [],
+  onDelete: () => {}
 };
 
 export default restaurant;

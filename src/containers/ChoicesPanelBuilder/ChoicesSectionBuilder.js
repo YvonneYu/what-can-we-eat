@@ -45,6 +45,10 @@ choicesSectionBuilder.propTypes = {
   choices: PropTypes.array
 };
 
+choicesSectionBuilder.defaultProps = {
+  choices: []
+};
+
 const mapStateToProps = state => ({
   choices: state.choicesPanel.choices
 });

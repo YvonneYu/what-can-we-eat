@@ -31,6 +31,10 @@ restaurantsBuilder.propsType = {
   isLoading: PropTypes.bool
 };
 
+restaurantsBuilder.defaultProps = {
+  isLoading:false
+};
+
 const mapStateToProps = state => ({
     restList: state.restaurantList.restList,
     isLoading: state.restaurantList.isLoading
