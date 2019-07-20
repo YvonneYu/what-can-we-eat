@@ -24,7 +24,7 @@ class findPanelBuilder extends Component {
   }
 
   componentWillReceiveProps() {
-    this.setState({ selectedList: this.randomSelectRest()});
+    this.setState({...this.state, selectedList: this.randomSelectRest()});
   }
 
   randomSelectRest(displayNumber=3) {
@@ -44,11 +44,11 @@ class findPanelBuilder extends Component {
     if (choices.length !== 0) {
       this.props.dispatch(actions.filterRestList(choices));
       this.props.dispatch(actions.resetChoices());
-      this.setState({ isSelectRest: true });
+      this.setState({ ...this.state, isSelectRest: true });
     } else {
       // 重新取得 restList
       this.props.dispatch(getRestListIfNeed());
-      this.setState({ selectedList: this.randomSelectRest()});
+      this.setState({...this.state, selectedList: this.randomSelectRest()});
     }
     // scroll to top
     window.scrollTo(0, 0);
