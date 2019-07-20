@@ -44,6 +44,8 @@ class findPanelBuilder extends Component {
       this.props.dispatch(actions.resetChoices());
       this.setState({ isSelectRest: true });
     } else {
+      // 重新取得 restList
+      this.props.dispatch(getRestListIfNeed());
       this.setState({ selectedList: this.randomSelectRest()});
     }
     // scroll to top
