@@ -18,7 +18,7 @@ function App(props) {
           <Route path="/edit/:id" exact component={ ChoicesPanelBuilder }></Route>
         </Layout>
       </div>
-      <div className={ 'is-loading ' + (props.isLoading && 'is-visible') }>
+      <div className={ 'is-loading' + (props.isLoading ? ' show' : '') }>
         <div className="sp sp-circle"></div>
       </div>
     </BrowserRouter>
